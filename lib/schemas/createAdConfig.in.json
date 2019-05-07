@@ -1,0 +1,91 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "adExportGroup": {
+                    "description": "If 'ad_userimport' is set to true,\nthe user must be member of this Active Directory group to receive a newly created DRACOON account.",
+                    "type": "string"
+                },
+                "alias": {
+                    "description": "Unique name for an Active Directory configuration",
+                    "type": "string"
+                },
+                "createHomeFolder": {
+                    "description": "Determines whether a room is created for each user that is created by automatic import (like a home folder).\nRoom's name will equal the user's login name.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "homeFolderParent": {
+                    "description": "ID of the room in which the individual rooms for users will be created.\ncf. 'ad_create_home_folder_on'",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "ldapUsersDomain": {
+                    "description": "Search scope of Active Directory; only users below this node can log on.",
+                    "type": "string"
+                },
+                "sdsImportGroup": {
+                    "description": "User group that is assigned to users who are created by automatic import.",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "serverAdminName": {
+                    "description": "Distinguished Name (DN) of Active Directory administrative account",
+                    "type": "string"
+                },
+                "serverAdminPassword": {
+                    "description": "Password of Active Directory administrative account",
+                    "type": "string"
+                },
+                "serverIp": {
+                    "description": "IPv4 or IPv6 address or host name",
+                    "type": "string"
+                },
+                "serverPort": {
+                    "description": "Port",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "sslFingerPrint": {
+                    "description": "SSL finger print of Active Directory server.\nMandatory for LDAPS connections.\nFormat: Algorithm/Fingerprint",
+                    "type": "string"
+                },
+                "useLdaps": {
+                    "description": "Determines whether LDAPS should be used instead of plain LDAP.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "userFilter": {
+                    "description": "Name of Active Directory attribute that is used as login name.",
+                    "type": "string"
+                },
+                "userImport": {
+                    "description": "Determines if an DRACOON account is automatically created for a new user\nwho successfully logs on with his/her AD account.",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "alias",
+                "ldapUsersDomain",
+                "serverAdminName",
+                "serverAdminPassword",
+                "serverIp",
+                "serverPort",
+                "useLdaps",
+                "userFilter",
+                "userImport"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

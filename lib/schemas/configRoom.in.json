@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "room_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "adminGroupIds": {
+                    "description": "List of group ids\nA room requires at least one admin (user or group)",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "adminIds": {
+                    "description": "List of user ids\nA room requires at least one admin (user or group)",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "hasActivitiesLog": {
+                    "description": "Is activities log active (for rooms only)\n(default: true)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "hasRecycleBin": {
+                    "description": "Is Recycle Bin active (for rooms only)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "inheritPermissions": {
+                    "description": "Inherit permissions from parent room",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "newGroupMemberAcceptance": {
+                    "description": "Behaviour when new users are added to the group:\n* autoallow\n* pending\n\nOnly relevant if 'adminGroupIds' has items.\n(default: autoallow)",
+                    "type": "string"
+                },
+                "recycleBinRetentionPeriod": {
+                    "description": "Retention period for deleted nodes in days\n(Integer between 0 and 9999)",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "takeOverPermissions": {
+                    "description": "Take over existing permissions",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

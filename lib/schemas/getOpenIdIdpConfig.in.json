@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "idp_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

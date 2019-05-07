@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "access_key": {
+            "required": true,
+            "type": "string"
+        },
+        "upload_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

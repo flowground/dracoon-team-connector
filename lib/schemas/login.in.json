@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "authType": {
+                    "description": "Authentication type code",
+                    "type": "string"
+                },
+                "language": {
+                    "description": "Language ID or ISO 639-1 code",
+                    "type": "string"
+                },
+                "login": {
+                    "description": "User login name",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "For RADIUS Access-Challenge\nIf a 'replyState' is returned, it must be included as 'state' in the following request.",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "Token",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "login",
+                "password"
+            ],
+            "type": "object"
+        }
+    }
+}

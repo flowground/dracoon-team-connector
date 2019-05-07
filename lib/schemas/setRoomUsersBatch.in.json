@@ -1,0 +1,108 @@
+{
+    "type": "object",
+    "properties": {
+        "room_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "items": {
+                    "description": "List of room-user mappings",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "description": "Unique identifier for the user",
+                                "format": "int64",
+                                "type": "integer"
+                            },
+                            "permissions": {
+                                "description": "Available permissions for this node",
+                                "properties": {
+                                    "change": {
+                                        "description": "User/Group may update meta data of nodes: rename files and folders, change classification, etc.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "create": {
+                                        "description": "User/Group may upload files, create folders and copy/move files to this room, overwriting is not possible.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "delete": {
+                                        "description": "User/Group may overwrite and remove files/folders, move files from this room.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "deleteRecycleBin": {
+                                        "description": "User/Group may permanently remove files/folders from the Recycle Bin.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "manage": {
+                                        "description": "User/Group may grant all of the above permissions to other users and groups independently,\nmay update room metadata and create/update/delete subordinary rooms, has all permissions.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "manageDownloadShare": {
+                                        "description": "User/Group may create Download Shares for files and containers view all previously created Download Shares in this room.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "manageUploadShare": {
+                                        "description": "User/Group may create Upload Shares for containers, view all previously created Upload Shares in this room.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "read": {
+                                        "description": "User/Group may see all rooms, files and folders in the room and download everything, copy files from this room.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "readRecycleBin": {
+                                        "description": "User/Group may look up files/folders in the Recycle Bin.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "restoreRecycleBin": {
+                                        "description": "User/Group may restore files/folders from Recycle Bin – room permissions required.",
+                                        "example": false,
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "change",
+                                    "create",
+                                    "delete",
+                                    "deleteRecycleBin",
+                                    "manage",
+                                    "manageDownloadShare",
+                                    "manageUploadShare",
+                                    "read",
+                                    "readRecycleBin",
+                                    "restoreRecycleBin"
+                                ],
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "permissions"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

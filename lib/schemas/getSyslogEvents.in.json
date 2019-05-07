@@ -1,0 +1,50 @@
+{
+    "type": "object",
+    "properties": {
+        "offset": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "date_start": {
+            "required": false,
+            "type": "string"
+        },
+        "date_end": {
+            "required": false,
+            "type": "string"
+        },
+        "type": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "user_id": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "status": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "user_client": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

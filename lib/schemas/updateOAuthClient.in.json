@@ -1,0 +1,50 @@
+{
+    "type": "object",
+    "properties": {
+        "client_id": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "accessTokenValidity": {
+                    "description": "Validity of the access token in seconds.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "clientSecret": {
+                    "description": "Secret, which uses the client for authentication.",
+                    "type": "string"
+                },
+                "grantTypes": {
+                    "description": "Authorized grant types\ncf. [RFC 6749](https://tools.ietf.org/html/rfc6749)",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "redirectUris": {
+                    "description": "URIs, to which a user is redirected after authorization.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "redirectUrl": {
+                    "description": "DEPRECATED: URL, to which a user is redirected after authorization.",
+                    "type": "string"
+                },
+                "refreshTokenValidity": {
+                    "description": "Validity of the refresh token in seconds.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

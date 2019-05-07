@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "failoverServer": {
+                    "description": "RADIUS Failover Server",
+                    "properties": {
+                        "failoverEnabled": {
+                            "description": "RADIUS Failover Server is active",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "failoverIpAddress": {
+                            "description": "RADIUS Failover Server IP Address\nRequired if failover server is enabled.",
+                            "type": "string"
+                        },
+                        "failoverPort": {
+                            "description": "RADIUS Failover Server Port\nRequired if failover server is enabled.",
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "failoverEnabled"
+                    ],
+                    "type": "object"
+                },
+                "ipAddress": {
+                    "description": "RADIUS Server IP Address",
+                    "type": "string"
+                },
+                "otpPinFirst": {
+                    "description": "Sequence order of concatenated PIN and one-time token",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "port": {
+                    "description": "RADIUS Server Port",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "sharedSecret": {
+                    "description": "Shared Secret to access the RADIUS server",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ipAddress",
+                "port",
+                "sharedSecret"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

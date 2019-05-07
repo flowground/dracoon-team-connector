@@ -1,0 +1,46 @@
+{
+    "type": "object",
+    "properties": {
+        "group_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Group name",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

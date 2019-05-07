@@ -1,0 +1,52 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "acceptEULA": {
+                    "description": "Accept EULA\nPresent, if EULA is system global active.\ncf. `GET config/settings` - 'eula_active'\nIf accepted can not be undone.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "email": {
+                    "description": "DEPRECATED: Email",
+                    "type": "string"
+                },
+                "firstName": {
+                    "description": "User first name",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "Gender",
+                    "enum": [
+                        "m",
+                        "f",
+                        "n"
+                    ],
+                    "type": "string"
+                },
+                "lastName": {
+                    "description": "User last name",
+                    "type": "string"
+                },
+                "login": {
+                    "description": "User login name",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Job title",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

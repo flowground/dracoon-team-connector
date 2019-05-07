@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "token": {
+            "required": true,
+            "type": "string"
+        },
+        "Range": {
+            "required": false,
+            "type": "string"
+        },
+        "generic_mimetype": {
+            "required": false,
+            "type": "boolean"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "token": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "type": "string",
+            "format": "binary"
+        },
+        "Content_Range": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

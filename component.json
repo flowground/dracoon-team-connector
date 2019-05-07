@@ -1,0 +1,2916 @@
+{
+    "title": "DRACOON",
+    "description": "REST Web Services for DRACOON.<br> Version. 4.5.0  - built at: 1517571015562",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/dracoon.team/4.5.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://dracoon.team/api",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "login": {
+            "main": "./lib/actions/login.js",
+            "title": "Authenticate user",
+            "description": "### Functional Description:\nAuthenticates user and provides an authentication token that is required for most operations.\n\n### Precondition:\nExisting user that is not locked.\n\n### Effects:\nUser is logged in.\n\n### Further Information:\nThe provided token is valid for **2 hours**, every usage resets this period to 2 full hours again.  \nLogging off invalidates the token.  \n\n### Important:  \n* If auth type `radius` is used, a token (request parameter) may be set, otherwise this parameter is ignored.  \n* If the token is set, `password` is optional for this auth type.\n\n### Currently supported languages (with ISO 639-1 code):\n* German (de)\n* English (en)\n* Spanish (es)\n* French (fr)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/login.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "completeOpenIdLogin": {
+            "main": "./lib/actions/completeOpenIdLogin.js",
+            "title": "Complete OpenID Connect authentication",
+            "description": "### Functional Description:  \nThis is the second step of the OpenID Connect authentication.  \nThe user hands over the authorization code and is logged in.\n\n### Precondition:\nExisting user with activated OpenID Connect authentication that is not locked.\n\n### Effects:\nUser is logged in.\n\n### Further Information:\nSee [http://openid.net/developers/specs](http://openid.net/developers/specs) for further information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/completeOpenIdLogin.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOpenIdAuthResources": {
+            "main": "./lib/actions/getOpenIdAuthResources.js",
+            "title": "Get OpenID Connect authentication resources",
+            "description": "### Functional Description:  \nProvides information about OpenID Connect authentication options.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOpenIdAuthResources.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ping": {
+            "main": "./lib/actions/ping.js",
+            "title": "Ping",
+            "description": "### Functional Description:\nTest connection to DRACOON Server.\n\n### Precondition:\nNone.\n\n### Effects:\n`200 OK` with current date string is returned if successful.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ping.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "requestPasswordReset": {
+            "main": "./lib/actions/requestPasswordReset.js",
+            "title": "Request password reset",
+            "description": "### Functional Description:  \nRequest an email with a request token for a certain user to reset his / her password.\n\n### Precondition:\nRegistered user account.\n\n### Effects:\nProvided user receives email with reset token.\n\n### Further Information:\nNone.\n\n### Currently supported languages (with ISO 639-1 code):\n* German (de)\n* English (en)\n* Spanish (es)\n* French (fr)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/requestPasswordReset.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "validateResetPasswordToken": {
+            "main": "./lib/actions/validateResetPasswordToken.js",
+            "title": "Get information for password reset",
+            "description": "### Functional Description:  \nRequest all information for a password change dialogue e.g. real name of user.\n\n### Precondition:\nUser received a password reset token.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/validateResetPasswordToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "resetPassword": {
+            "main": "./lib/actions/resetPassword.js",
+            "title": "Reset password",
+            "description": "### Functional Description:  \nResets a user's password to a new value.\n\n### Precondition:\nUser received a password reset token.\n\n### Effects:\nNewly transmitted password is set.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/resetPassword.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAuthInitResources": {
+            "main": "./lib/actions/getAuthInitResources.js",
+            "title": "Get authentication resources",
+            "description": "### Functional Description:  \nProvides information about authentication options.\n\n### Precondition: \nNone.\n\n### Effects: \nNone.\n\n### Further Information:\nThe server identifies the relevant customer by the passed HTTP header `Origin`.  \nUse this call to customize the log-on form.  \n\n### Important: \nThe default language and authentication method are always provided as topmost entry.\n\n### Currently supported languages (with ISO 639-1 code):\n* German (de)\n* English (en)\n* Spanish (es)\n* French (fr)",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAuthInitResources.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAuthSettings": {
+            "main": "./lib/actions/getAuthSettings.js",
+            "title": "Get authentication settings",
+            "description": "### Functional Description:  \nRetrieve the settings of authentication configuration.\n\n### Precondition:\nRight _\"read global config\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Configuration settings for various authentication methods\n\n### Authentication Methods\n\n* **sql**  \n    **Basic Authentication globally allowed**  \n    This option must be activated to allow users to log in with their credentials stored in the database.  \n    VALUE: `[true|false]`\n\n* **active_directory**  \n    **Active Directory Authentication globally allowed**  \n    This option must be activated to allow users to log in with their Active Directory credentials.  \n    VALUE: `[true|false]`\n\n* **radius**  \n    **RADIUS Authentication globally allowed**  \n    This option must be activated to allow users to log in with their RADIUS username, their PIN and a token password.  \n    VALUE: `[true|false]`\n\n* **openid**  \n    **OpenID Connect Authentication globally allowed**  \n    This option must be activated to allow users to log in with their OpenID Connect identity.  \n    VALUE: `[true|false]`\n\n* **default_auth_method**  \n    **Default authentication method without user context**  \n    If this option is set, the chosen method will be provided as default authentication method if no user context is available.  \n    Only one authentication method can be set and it must be allowed (see above).  \n    If no value is set, there is no guarantee about the order of the returned methods.  \n    Only activated authentication methods may be set as default authentication method.  \n    VALUE: `[sql|active_directory|radius|openid]`\n\n### Configurable settings for RADIUS authentication\n\n### `DEPRECATED`\n\nThese settings will be ignored.  \nPlease use `/system/config/auth/radius` API.\n\n* **radius-ip**  \n    IP address of the RADIUS server  \n    VALUE: `IPv4 address`\n\n* **radius-port**  \n    Port of the RADIUS server (usually 1812)  \n    VALUE: `Port`\n\n* **radius-sharedsec**  \n    Shared Secret to access the RADIUS server  \n    VALUE: `Shared Secret`\n\n* **radius-otpPinFirst**  \n    Sequence order of concatenated PIN and One-Time token  \n    VALUE: `[true|false]`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAuthSettings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setAuthSettings": {
+            "main": "./lib/actions/setAuthSettings.js",
+            "title": "Change authentication setting",
+            "description": "### Functional Description:\nChange one or more settings of authentication configuration.\n\n### Precondition:\nRight _\"change global config\"_ required.\n\n### Effects:\nOne or more global authentication setting gets changed.\n\n### Further Information:\nNone.\n\n### Configuration settings for various authentication methods\n\n### Authentication Methods\n\n* **sql**  \n    **Basic Authentication globally allowed**  \n    This option must be activated to allow users to log in with their credentials stored in the database.  \n    VALUE: `[true|false]`\n\n* **active_directory**  \n    **Active Directory Authentication globally allowed**  \n    This option must be activated to allow users to log in with their Active Directory credentials.  \n    VALUE: `[true|false]`\n\n* **radius**  \n    **RADIUS Authentication globally allowed**  \n    This option must be activated to allow users to log in with their RADIUS username, their PIN and a token password.  \n    VALUE: `[true|false]`\n\n* **openid**  \n    **OpenID Connect Authentication globally allowed**  \n    This option must be activated to allow users to log in with their OpenID Connect identity.  \n    VALUE: `[true|false]`\n\n* **default_auth_method**  \n    **Default authentication method without user context**  \n    If this option is set, the chosen method will be provided as default authentication method if no user context is available.  \n    Only one authentication method can be set and it must be allowed (see above).  \n    If no value is set, there is no guarantee about the order of the returned methods.  \n    Only activated authentication methods may be set as default authentication method.  \n    VALUE: `[sql|active_directory|radius|openid]`\n\n### Configurable settings for RADIUS authentication\n\n### `DEPRECATED`\n\nThese settings will be ignored.  \nPlease use `PUT /system/config/auth/radius` API.\n\n* **radius-ip**  \n    IP address of the RADIUS server  \n    VALUE: `IPv4 address`\n\n* **radius-port**  \n    Port of the RADIUS server (usually 1812)  \n    VALUE: `Port`\n\n* **radius-sharedsec**  \n    Shared Secret to access the RADIUS server  \n    VALUE: `Shared Secret`\n\n* **radius-otpPinFirst**  \n    Sequence order of concatenated PIN and One-Time token  \n    VALUE: `[true|false]`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setAuthSettings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSystemSettings": {
+            "main": "./lib/actions/getSystemSettings.js",
+            "title": "Get system settings",
+            "description": "### Functional Description:  \nDRACOON configuration entry point.  \nReturns a list of configurable system settings.\n\n### Precondition:\nRight _\"read global config\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\n\n### Attention\nIf `eula_active` is true, but not accepted yet, or password must be changed, only the following two values are returned:\n* **allow_system_global_weak_password**\n* **eula_active**\n\n### Configurable settings\n\n* **allow_system_global_weak_password**  \n    Allow weak password\n    * A weak password has to fulfill the following criteria:  \n        * is at least 8 characters long  \n        * contains letters and numbers\n    * A strong password has to fulfill the following criteria in addition:  \n        * contains at least one special character  \n        * contains upper and lower case characters\n\n    VALUE: `[true|false]`\n\n* **branding_server_branding_id** **`NEW`**  \n    The branding UUID, which corresponds to _BRANDING-QUALIFIER_ in the new branding server.  \n    VALUE: `String`\n\n* **branding_portal_url** **`NEW`**  \n    Access URL to to the Branding Portal.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `String`\n\n* **branding_server_customer**  \n    The UUID of the branding server customer, which corresponds to customer key in the branding server.  \n    VALUE: `String`\n\n* **branding_server_url**  \n    Access URL to to the Branding Server.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `String`\n\n* **connect_as_drive**  \n    Rooms can be mounted by WebDAV.  \n    VALUE: `[true|false]`\n\n* **dblog**  \n    Write logs to local database  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **default_downloadshare_expiration_period**  \n    Default expiration period for Download Shares in days.  \n    VALUE: `Integer between 0 and 9999`\n\n* **default_file_upload_expiration_date**  \n    Default expiration period for all uploaded files in days.  \n    VALUE: `Integer between 0 and 9999` (set 0 to disable)\n\n* **default_language**  \n    Define which language should be default.  \n    VALUE: `cf. GET /auth/resources Model \"Language\"`\n\n* **default_uploadshare_expiration_period**  \n    Default expiration period for Upload Shares in days.  \n    VALUE: `Integer between 0 and 9999`\n\n* **email_from**  \n    Sender of system-generated emails  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Valid email address`\n\n* **email_to_sales**  \n    Contact email address for customers to request more user licenses or data volume.  \n    VALUE: `Valid email address`\n\n* **email_to_support**  \n    Support email address for users.  \n    VALUE: `Valid email address`\n\n* **enable_client_side_crypto**  \n    Activation status of **TripleCrypt(tm) Technology**.  \n    Can only be enabled once; disabling is not possible.  \n    VALUE: `[true|false]` (default: `false`)\n\n* **eula_active**  \n    Each user has to confirm the EULA at first login.  \n    VALUE: `[true|false]`\n\n* **eventlog_retention_period**  \n    Retention period (in days) of event log entries.  \n    After that period, all entries are deleted.  \n    Recommended value: 7  \n    VALUE: `Integer between 0 and 9999` (if set to 0: no logs are deleted)\n\n* **file_size_js**  \n    Maximum file size (in bytes) for downloads of encrypted files with JavaScript.  \n    Bigger files will require a JavaApplet.  \n    Recommended value: 10485760 (= 10MB)  \n    VALUE: `Integer`\n\n* **ip_address_logging**  \n    Determines whether a user's IP address is logged on login.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **mailserver**  \n    Email server to send emails  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `DNS name or IPv4 of an email server`\n\n* **mailserver_authentication_necessary**  \n    Set to true if the email server requires authentication.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **mailserver_password**  \n**Password is no longer returned.**\n\n* **mailserver_password_set**  \n    Indicates if a password is set for the mailserver (because `mailserver_password` is always returned empty)  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **mailserver_port**  \n    Email server port  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Positive number`\n\n* **mailserver_username**  \n    User name for email server  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `User name for authentication`\n\n* **mailserver_use_ssl**  \n    Email server requires SSL connection?  \n    Only visible for _Config Manager_ of Provider Customer  \n    Requires mailserver_use_starttls to be false  \n    VALUE: `[true|false]`\n\n* **mailserver_use_starttls**  \n    Email server requires StartTLS connection?  \n    Only visible for _Config Manager_ of Provider Customer  \n    Requires mailserver_use_ssl to be false  \n    VALUE: `[true|false]`\n\n* **syslog**  \n    Write logs to a syslog interface  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **syslog_host**  \n    Syslog Server (IP or FQDN)  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `DNS name or IPv4 of a syslog server`\n\n* **syslog_port**  \n    Syslog server port  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Positive Number`\n\n* **syslog_protocol**  \n    Protocol to connect to syslog server  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[TCP|UDP]`\n\n* **system_name**  \n    System name  \n    VALUE: `Display name of the DRACOON`\n\n* **enable_email_notification_button**  \n    Enable mail notification button  \n    VALUE: `[true|false]`\n\n* **allow_share_password_sms**  \n    Allow sending of share passwords via SMS  \n    VALUE: `[true|false]`\n\n* **globally_allow_share_password_sms**  \n    Allow sending of share passwords via SMS  \n    Read only  \n    VALUE: `[true|false]`\n\n* **use_s3_storage**  \n    Defines if S3 is used as storage backend  \n    Read only  \n    VALUE: `[true|false]`\n\n* **s3_default_region**  \n    Suggested S3 region  \n    Read only  \n    VALUE: `Region name`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSystemSettings.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setSystemSetting": {
+            "main": "./lib/actions/setSystemSetting.js",
+            "title": "Change system settings",
+            "description": "### Functional Description:\nDRACOON configuration entry point.  \nReturns a list of configurable settings.\n\n### Precondition:\nRight _\"change global config\"_ required.\n\n### Effects:\nOne or more global authentication setting gets changed.\n\n### Further Information:\n\n### Attention\nOnly visible for _Config Manager_ of Provider Customer.\n\n### Settings\n\n### Configurable settings\n\n* **allow_system_global_weak_password**  \n    Allow weak password\n    * A weak password has to fulfill the following criteria:  \n        * is at least 8 characters long  \n        * contains letters and numbers\n    * A strong password has to fulfill the following criteria in addition:  \n        * contains at least one special character  \n        * contains upper and lower case characters\n\n    VALUE: `[true|false]`\n\n* **branding_server_branding_id** **`NEW`**  \n    The branding UUID, which corresponds to _BRANDING-QUALIFIER_ in the new branding server.  \n    VALUE: `String`\n\n* **branding_portal_url** **`NEW`**  \n    Access URL to to the Branding Portal.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `String`\n\n* **branding_server_customer**  \n    The UUID of the branding server customer, which corresponds to customer key in the branding server.  \n    VALUE: `String`\n\n* **branding_server_url**  \n    Access URL to to the Branding Server.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `String`\n\n* **connect_as_drive**  \n    Rooms can be mounted by WebDAV.  \n    VALUE: `[true|false]`\n\n* **dblog**  \n    Write logs to local database  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **default_downloadshare_expiration_period**  \n    Default expiration period for Download Shares in days.  \n    VALUE: `Integer between 0 and 9999`\n\n* **default_file_upload_expiration_date**  \n    Default expiration period for all uploaded files in days.  \n    VALUE: `Integer between 0 and 9999` (set 0 to disable)\n\n* **default_language**  \n    Define which language should be default.  \n    VALUE: `cf. GET /auth/resources Model \"Language\"`\n\n* **default_uploadshare_expiration_period**  \n    Default expiration period for Upload Shares in days.  \n    VALUE: `Integer between 0 and 9999`\n\n* **email_from**  \n    Sender of system-generated emails  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Valid email address`\n\n* **email_to_sales**  \n    Contact email address for customers to request more user licenses or data volume.  \n    VALUE: `Valid email address`\n\n* **email_to_support**  \n    Support email address for users.  \n    VALUE: `Valid email address`\n\n* **enable_client_side_crypto**  \n    Activation status of **TripleCrypt(tm) technology**.  \n    Can only be enabled once; disabling is not possible.  \n    VALUE: `[true|false]` (default: `false`)\n\n* **eula_active**  \n    Each user has to confirm the EULA at first login.  \n    VALUE: `[true|false]`\n\n* **eventlog_retention_period**  \n    Retention period (in days) of event log entries.  \n    After that period, all entries are deleted.  \n    Recommended value: 7  \n    VALUE: `Integer between 0 and 9999` (if set to 0: no logs are deleted)\n\n* **file_size_js**  \n    Maximum file size (in bytes) for downloads of encrypted files with JavaScript.  \n    Bigger files will require a JavaApplet.  \n    Recommended value: 10485760 (= 10MB)  \n    VALUE: `Integer`\n\n* **ip_address_logging**  \n    Determines whether a user's IP address is logged on login.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **mailserver**  \n    Email server to send emails  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `DNS name or IPv4 of an email server`\n\n* **mailserver_authentication_necessary**  \n    Set to true if the email server requires authentication.  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **mailserver_password**  \n    Password for email server  \n    VALUE: `Password for authentication`\n\n* **mailserver_port**  \n    Email server port  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Positive number`\n\n* **mailserver_username**  \n    User name for email server  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `User name for authentication`\n\n* **mailserver_use_ssl**  \n    Email server requires SSL connection?  \n    Only visible for _Config Manager_ of Provider Customer  \n    Requires mailserver_use_starttls to be false  \n    VALUE: `[true|false]`\n\n* **mailserver_use_starttls**  \n    Email server requires StartTLS connection?  \n    Only visible for _Config Manager_ of Provider Customer  \n    Requires mailserver_use_ssl to be false  \n    VALUE: `[true|false]`\n\n* **syslog**  \n    Write logs to a syslog interface  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[true|false]`\n\n* **syslog_host**  \n    Syslog Server (IP or FQDN)  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `DNS name or IPv4 of a syslog server`\n\n* **syslog_port**  \n    Syslog server port  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `Positive Number`\n\n* **syslog_protocol**  \n    Protocol to connect to syslog server  \n    Only visible for _Config Manager_ of Provider Customer  \n    VALUE: `[TCP|UDP]`\n\n* **system_name**  \n    System name  \n    VALUE: `Display name of the DRACOON`\n\n* **enable_email_notification_button**  \n    Enable mail notification button  \n    VALUE: `[true|false]`\n\n* **allow_share_password_sms**  \n    Allow sending of share passwords via SMS  \n    VALUE: `[true|false]`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setSystemSetting.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getZipFileByToken": {
+            "main": "./lib/actions/getZipFileByToken.js",
+            "title": "Download ZIP file",
+            "description": "### Functional Description:  \nDownload multiple files in a ZIP archive.\n\n### Precondition:\nValid download token.\n\n### Effects:\nNone.\n\n### Further Information:\nCreate a download token with `POST /nodes/zip`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getZipFileByToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFileDataByToken": {
+            "main": "./lib/actions/getFileDataByToken.js",
+            "title": "Download file",
+            "description": "### Functional Description:  \nDownload a file.\n\n### Precondition:\nValid download token.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFileDataByToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFileDataByToken_1": {
+            "main": "./lib/actions/getFileDataByToken_1.js",
+            "title": "Download file",
+            "description": "### Functional Description:  \nDownload a file.\n\n### Precondition:\nValid download token.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFileDataByToken_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAuditNodeUserData": {
+            "main": "./lib/actions/getAuditNodeUserData.js",
+            "title": "Get node assigned users with permissions",
+            "description": "### Functional Description:  \nRetrieve a list of all nodes of type `room` and the room assignment users with permissions.\n\n### Precondition:\nRight _\"read audit log\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields are supported.\n\n### Filter fields:\n\n* **nodeId**  \n    Node ID  \n    OPERATOR: `eq` (Node ID equal value)  \n    VALUE: `Search string`\n\n* **nodeName**  \n    Node name (Login)  \n    OPERATOR: `cn|eq` (Node name contains value | equal value)  \n    VALUE: `Search string`\n\n* **nodeParentId**  \n    Node parent ID  \n    OPERATOR: `eq` (Parent ID equal value; parent ID 0 is the root node.)  \n    VALUE: `Search string`\n\n* **userId**  \n    User ID  \n    OPERATOR: `eq` (User ID equal value)  \n    VALUE: `Search string`\n\n* **userName**  \n    User name (Login)  \n    OPERATOR: `cn|eq` (User name contains value | equal value)  \n    VALUE: `Search string`\n\n* **userFirstName**  \n    User first name  \n    OPERATOR: `cn|eq` (User first name contains value | equal value)  \n    VALUE: `Search string`\n\n* **userLastName**  \n    User last name  \n    OPERATOR: `cn|eq` (User last name contains value | equal value)  \n    VALUE: `Search string`\n\n* **permissionsManage**  \n    Filter the users that (don't) have manage right in this room  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n* **nodeIsEncrypted**  \n    Encrypted node filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n* **nodeHasRecycleBin**  \n    Recycle bin filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n    \n* **nodeHasActivitiesLog**  \n    Activities log filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n### Logical grouping:\nFiltering according first three fields (`login`, `lastName`, `firstName`) is intrinsically processed by the API as logical _OR_.  \nIn opposite, filtering according to is processed intrinsically as logical _AND_.\n\n### Example:\n* `userName:cn:searchString_1|userFirstName:cn:searchString_2|nodeId:eq:2`  \nFilter by user login containing `searchString_1` OR first name containing `searchString_2` and node ID equal 2.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields are supported.\n\n### Sort fields:\n\n* **nodeId**: Node ID\n* **nodeName**: Node name\n* **nodeParentId**: Node parent ID\n* **nodeSize**: Node size\n* **nodeQuota**: Node quota\n\n### Example:\n* `nodeName:asc`  \nSort by `nodeName` ascending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAuditNodeUserData.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLogEvents": {
+            "main": "./lib/actions/getLogEvents.js",
+            "title": "Get system events",
+            "description": "### Functional Description:  \nRetrieve eventlog (= audit log) events.\n\n### Precondition:\nRole _\"Log Auditor\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nOutput may be limited to a certain number of entries.  \nPlease use filter criteria and paging.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLogEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLogOperations": {
+            "main": "./lib/actions/getLogOperations.js",
+            "title": "Get allowed Log Operations",
+            "description": "### Functional Description:  \nRetrieve eventlog (= audit log) operation IDs and the associated log operation description.\n\n### Precondition:\nRole _\"Log Auditor\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLogOperations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGroups": {
+            "main": "./lib/actions/getGroups.js",
+            "title": "Get user groups",
+            "description": "### Functional Description:  \nReturns a list of user groups.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filters\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`\n\n### Filter fields:\n\n* **name**  \n    Group name  \n    OPERATOR: `cn` (Group name contains value; multiple values not allowed)  \n    VALUE: `Search string`\n\n### Example: \n* `name:cn:searchString`  \nFilter by group `name` containing `searchString`.\n\n### Sorting\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields are supported.\n\n### Sort fields:\n\n* **name**: Group name\n* **createdAt**: Creation date\n* **expireAt**: Expiration date\n* **cntUsers**: Amount of users\n\n### Example:\n* `name:asc|expireAt:desc`  \nSort by `name` ascending and by `expireAt` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createGroup": {
+            "main": "./lib/actions/createGroup.js",
+            "title": "Create new user group",
+            "description": "### Functional Description:\nCreate a new user group.\n\n### Precondition:\nRight _\"change groups\"_ required.\n\n### Effects:\nA new group is created.\n\n### Further Information:\n* If a group should not expire, leave `expireAt` empty.\n* Group names are limited to **150** characters\n* Allowed characters: **All**",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteGroup": {
+            "main": "./lib/actions/deleteGroup.js",
+            "title": "Delete user group",
+            "description": "### Functional Description:\nDelete a user group.\n\n### Precondition:\nRight _\"delete groups\"_ required.\n\n### Effects:\nUser group is deleted.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGroup": {
+            "main": "./lib/actions/getGroup.js",
+            "title": "Get user group",
+            "description": "### Functional Description:  \nRetrieve detailed information about one user group.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateGroup": {
+            "main": "./lib/actions/updateGroup.js",
+            "title": "Update user group",
+            "description": "### Functional Description:  \nUpdate the meta data of a user group.\n\n### Precondition:\nRight _\"change groups\"_ required.\n\n### Effects:\nMeta data of a user group is updated.\n\n### Further Information:\n* If a group should not expire, leave `expireAt` empty.\n* Group names are limited to **150** characters\n* Allowed characters: **All**",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGroupRoles": {
+            "main": "./lib/actions/getGroupRoles.js",
+            "title": "Get group roles",
+            "description": "### Functional Description:  \nRetrieve a list of all roles and the role assignment rights of a group.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGroupRoles.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGroupRooms": {
+            "main": "./lib/actions/getGroupRooms.js",
+            "title": "Get rooms granted to the group or/and rooms that can be granted",
+            "description": "### Functional Description:  \nRetrieve a list of rooms, that are granted or may be granted to the group.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **name**  \n    Room name  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isGranted**  \n    Filter rooms which the group is or is not granted  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **effectivePerm**  \n    Filter rooms with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `false`: _DIRECT_ permissions  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    \n    > _DIRECT_ means: e.g. room administrator grants read permissions to group of users **directly** on desired room.  \n    _EFFECTIVE_ means: e.g. group of users gets read permissions on desired room through **inheritance**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]` (default: `true`)\n\n### Example:\n* `isGranted:eq:false|name:cn:searchString`  \nGet all rooms where the group is not granted AND whose `name` is like `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGroupRooms.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteGroupMembers": {
+            "main": "./lib/actions/deleteGroupMembers.js",
+            "title": "Delete group members",
+            "description": "### Functional Description:  \nRemove group members.\n\n### Precondition:\nRight _\"change groups\"_ required.\n\n### Effects:\nProvided users are removed from the user group.\n\n### Further Information:\nBatch function.  \nThe provided users are removed from the user group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteGroupMembers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGroupUsers": {
+            "main": "./lib/actions/getGroupUsers.js",
+            "title": "Get group member users or/and users who can become a member",
+            "description": "### Functional Description:  \nRetrieve a list of group members.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **displayName**  \n    User display name (`firstName`, `lastName`, `login`)  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isMember**  \n    Filter the group members AND / OR users  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n### Example:\n* `is_member:eq:false|displayName:cn:searchString`  \nGet all users that are not in this group AND whose display name is like `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGroupUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addGroupMembers": {
+            "main": "./lib/actions/addGroupMembers.js",
+            "title": "Add group members",
+            "description": "### Functional Description:\nAdd members to a group.\n\n### Precondition:\nRight _\"change groups\"_ required.\n\n### Effects:\nNew members are added to the group.\n\n### Further Information:\nBatch function.  \nThe newly provided members will be added to the existing ones.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addGroupMembers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteNodes": {
+            "main": "./lib/actions/deleteNodes.js",
+            "title": "Delete file system nodes",
+            "description": "### Functional Description:\nDelete nodes (room, folder, file).\n\n### Precondition:\nAuthenticated user with _\"delete\"_ permissions on supplied nodes.\n\n### Effects:\nNodes are deleted.\n\n### Further Information:\nNodes must be in same parent.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFsNodes": {
+            "main": "./lib/actions/getFsNodes.js",
+            "title": "Get file system nodes",
+            "description": "### Functional Description:  \nProvides a hierarchical list of file system nodes (rooms, folders, files) of a given parent that are accessible by the current user.\n\n### Precondition:\nAuthenticated user.\n\n### Effects:\nNone.\n\n### Further Information:\n`EncryptionInfo` is not provided.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE[:VALUE...]`\n\n### Fields:\n\n* **type**  \n    Node type filter  \n    OPERATOR: `eq` (multiple values allowed)  \n    VALUE: `[room|folder|file]`\n\n* **perm**  \n    Permissions filter  \n    OPERATOR: `eq` (multiple values allowed)  \n    VALUE: `[manage|read|change|create|delete|manageDownloadShare|manageUploadShare|canReadRecycleBin|canRestoreRecycleBin|canDeleteRecycleBin]`\n\n* **childPerm**  \n    The same as **perm**, but less restrictive (applied to child nodes only)  \n    OPERATOR: `eq` (multiple values allowed)  \n    VALUE: `[manage|read|change|create|delete|manageDownloadShare|manageUploadShare|canReadRecycleBin|canRestoreRecycleBin|canDeleteRecycleBin]`\n\n* **name**  \n    Node name filter  \n    OPERATOR: `cn` (name contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n* **encrypted**  \n    Node encryption status filter  \n    OPERATOR: `eq` (Node is encrypted, multiple values not allowed)  \n    VALUE: `[true|false]`\n\n* **branchVersion**  \n    Node branch version  \n    OPERATOR: `ge|le`  \n    VALUE: `version number`\n\n### Example:\n* `type:eq:room:folder|perm:eq:read`  \nGet nodes where type equals `room` OR `folder` AND user has `read` permissions.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **name**: Node name\n* **createdBy**: Creator user name\n* **createdAt**: Creation date\n* **updatedBy**: Modifier user name\n* **updatedAt**: Modification date\n* **fileType**: File type (extension)\n* **classification**: Classification ID (for files only):  \n    * 1 - public\n    * 2 - for internal use only\n    * 3 - confidential\n    * 4 - strictly confidential\n* **size**: Node size\n* **cntAdmins**: **DEPRECATED (No effect)** For rooms only: Number of admins\n* **cntUsers**: **DEPRECATED (No effect)** For rooms only: Number of users\n* **nodeCntChildren**: For rooms / folders only: Number of direct children (not recursive)\n* **cntDeletedVersions**: For files / folders only: Number of deleted versions of this file / folder (not recursive)\n\n### Example:\n* `name:desc`  \nSort by `name` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFsNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteDeletedNodes": {
+            "main": "./lib/actions/deleteDeletedNodes.js",
+            "title": "Delete nodes from Recycle Bin",
+            "description": "### Functional Description:\nPermanently remove a list of nodes from the Recycle Bin.\n\n### Precondition:\nUser has _\"delete recycle bin\"_ permissions in parent room.\n\n### Effects:\nAll provided nodes are removed.\n\n### Further Information:\nThe removal of deleted nodes from the Recycle Bin is irreversible.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteDeletedNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "restoreNodes": {
+            "main": "./lib/actions/restoreNodes.js",
+            "title": "Restore deleted nodes",
+            "description": "### Functional Description:  \nRestore a list of deleted nodes.\n\n### Precondition:\nUser has _\"create\"_ permissions in parent room and _\"restore recycle bin\"_ permissions.\n\n### Effects:\nThe selected files are moved from the Recycle Bin to the chosen productive container.\n\n### Further Information:\nIf no parent ID is provided, the node is restored to its previous location.  \nThe default resolution strategy is `autorename` that adds numbers to the file name until the conflict is solved.  \nIf an existing file is overwritten, it is moved to the Recycle Bin instead of the restored one.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/restoreNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFsDeletedNode": {
+            "main": "./lib/actions/getFsDeletedNode.js",
+            "title": "Get deleted node",
+            "description": "### Functional Description:  \nGet the meta data of one deleted node.\n\n### Precondition:\nUser can access parent room and has _\"read recycle bin\"_ permissions.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFsDeletedNode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setUserFileKeys": {
+            "main": "./lib/actions/setUserFileKeys.js",
+            "title": "Set FileKeys for a list of users and files",
+            "description": "### Functional Description:  \nSets symmetric file keys for several users and files.\n\n### Precondition:\nUser has file keys for the files.\n\n### Effects:\nStores new file keys for other users.\n\n### Further Information:\nOnly users with copies of the file key (encrypted with their public keys) can access a certain file.  \nThis endpoint is used for the distribution of file keys amongst an authorized user base.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setUserFileKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createFileUpload": {
+            "main": "./lib/actions/createFileUpload.js",
+            "title": "Create new file upload channel",
+            "description": "### Functional Description:\nThis endpoint creates a new upload channel which is the first step in any file upload workflow.\n\n### Precondition:\nUser has _\"create\"_ permissions in the parent container (room or folder).\n\n### Effects:\nA new upload channel for a file is created.  \nIts ID and an upload token are returned.\n\n### Further Information:\nThe upload ID is used for uploads with `X-Sds-Auth-Token` header, the upload token can be used for uploads without authentication header.\n\nPlease provide the size of the intended upload so that the quota can be checked in advanced and no data is transferred unnecessarily.\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createFileUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cancelFileUpload": {
+            "main": "./lib/actions/cancelFileUpload.js",
+            "title": "Cancel file upload",
+            "description": "### Functional Description:\nCancel an upload and destroy the Upload Channel.\n\n### Precondition:\nAn Upload Channel has been created.\n\n### Effects:\nThe Upload Channel is removed and all temporary uploaded data is purged.\n\n### Further Information:\nIt is recommended to notify the API about cancelled uploads if possible.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cancelFileUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "uploadFile": {
+            "main": "./lib/actions/uploadFile.js",
+            "title": "Upload file",
+            "description": "### Functional Description:  \nUploads a file or parts of it in an active Upload Channel.\n\n### Precondition:\nAn Upload Channel has been created.\n\n### Effects:\nA file or parts of it are uploaded to a temporary location.\n\n### Further Information:\nThis endpoints supports chunked upload.  \nPlease cf. [RFC 7233](https://tools.ietf.org/html/rfc7233) for further information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/uploadFile.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "completeFileUpload": {
+            "main": "./lib/actions/completeFileUpload.js",
+            "title": "Complete file upload",
+            "description": "### Functional Description:\nFinishes an upload and closes the corresponding Upload Channel.\n\n### Precondition:\nAn Upload Channel has been created and data has been transmitted.\n\n### Effects:\nThe upload is finished and the temporary file is moved to the productive environment.\n\n### Further Information:\nThe provided file name might be changed in accordance with the resolution strategy:  \n* **autorename**: changes the file name and adds a number to avoid conflicts.\n* **overwrite**: deletes any old file with the same file name.\n* **fail**: returns an error; in this case, another `PUT` request with a different file name may be sent.\n\nPlease ensure that all chunks have been transferred correctly before finishing the upload.\n\n### 200 OK is not used by this API",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/completeFileUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateFile": {
+            "main": "./lib/actions/updateFile.js",
+            "title": "Update file meta data",
+            "description": "### Functional Description:  \nUpdates a file's meta data.\n\n### Precondition:\nUser has _\"change\"_ permissions in parent room.\n\n### Effects:\nMeta data changed.\n\n### Further Information:\nNone.\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateFile.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDataRoomFileKey": {
+            "main": "./lib/actions/getDataRoomFileKey.js",
+            "title": "Get room emergency password",
+            "description": "### Functional Description:  \nReturns the file key for the room emergency password of a certain file (if available).\n\n### Precondition:\nUser with _\"read\"_ permissions in parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDataRoomFileKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDataSpaceFileKey": {
+            "main": "./lib/actions/getDataSpaceFileKey.js",
+            "title": "Get system emergency password",
+            "description": "### Functional Description:  \nReturns the file key for the system emergency password of a certain file (if available).\n\n### Precondition:\nUser with _\"read\"_ permissions in parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDataSpaceFileKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFileData": {
+            "main": "./lib/actions/getFileData.js",
+            "title": "Download file",
+            "description": "### Use `downloads` API\n\n### Functional Description:\nDownload a file.\n\n### Precondition:\nUser with _\"read\"_ permissions in parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RFC 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFileData.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFileData_1": {
+            "main": "./lib/actions/getFileData_1.js",
+            "title": "Download file",
+            "description": "### Use `downloads` API\n\n### Functional Description:\nDownload a file.\n\n### Precondition:\nUser with _\"read\"_ permissions in parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RFC 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFileData_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createFileDownloadToken": {
+            "main": "./lib/actions/createFileDownloadToken.js",
+            "title": "Generate download token",
+            "description": "### Functional Description:\nCreate a download token to retrieve a file without `X-Sds-Auth-Token` Header.\n\n### Precondition:\nUser with _\"read\"_ permissions in parent room.\n\n### Effects:\nDownload token is generated and returned.\n\n### Further Information:\nThe token is necessary to access `downloads` ressources.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createFileDownloadToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUserFileKey": {
+            "main": "./lib/actions/getUserFileKey.js",
+            "title": "Get user's file key",
+            "description": "### Functional Description:  \nReturns the file key for the current user (if available).\n\n### Precondition:\nUser with _\"read\"_, _\"create\"_ or _\"manage download share\"_ permissions in parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nThe symmetric file key is encrypted with the user's public key.  \nFile keys are generated with the workflow _\"Generate file keys\"_ that starts at `GET /nodes/missingFileKeys`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUserFileKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createFolder": {
+            "main": "./lib/actions/createFolder.js",
+            "title": "Create new folder",
+            "description": "### Functional Description:\nCreates a new folder.\n\n### Precondition:\nUser has _\"create\"_ permissions in current room.\n\n### Effects:\nA new folder is created.\n\n### Further Information:\nFolders cannot be created on top level (without parent element).\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateFolder": {
+            "main": "./lib/actions/updateFolder.js",
+            "title": "Update folder",
+            "description": "### Functional Description:  \nRenames an existing folder.\n\n### Precondition:\nUser has _\"change\"_ permissions in current room.\n\n### Effects:\nThe folder is renamed.\n\n### Further Information:\nNone.\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateFolder.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "missingFileKeys": {
+            "main": "./lib/actions/missingFileKeys.js",
+            "title": "Get files where the user has no filekey",
+            "description": "### Functional Description:  \nRequests a list of missing file keys that may be generated by the current user.\n\n### Precondition:\nUser has a key pair.\n\n### Effects:\nNone.\n\n### Further Information:\nClients should regularly request missing file keys to provide access to files for other users.  \nThe returned list is ordered by priority (emergency passwords are returned first).  \n### Please note: \nThis API returns **1024** entries at maximum.  \nThere might be more entries even if a total of 1024 is returned.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/missingFileKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createRoom": {
+            "main": "./lib/actions/createRoom.js",
+            "title": "Create new room",
+            "description": "### Functional Description:\nCreates a new room at the provided parent node.  \nCreation of top level rooms provided.\n\n### Precondition:\nUser has _\"create\"_ permissions in the parent room.\n\n### Effects:\nA new room is created.\n\n### Further Information:  \nRooms may only have other rooms as parent.  \nRooms on top level do not have any parent.  \nRooms may have rooms as children on n hierarchy levels.  \nIf permission inheritance is disabled, there must be at least one admin user / group (with neither the group nor the user having an expiration date).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createRoom.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPendingAssignments": {
+            "main": "./lib/actions/getPendingAssignments.js",
+            "title": "Get user-room assignments per group that have not been accepted yet",
+            "description": "### Functional Description:  \nRequests a list of user-room assignments by groups that have not been approved yet  \nThese can have the state:\n* **WAITING**  \n* **DENIED**  \n* **ACCEPTED**  \n\n**ACCEPTED** assignments are already removed from the list.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nRoom administrators should regularly request pending assingments to provide access to rooms for other users.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE[:VALUE...]`\n\n### Fields:\n\n* **userId**  \n    User ID filter  \n    OPERATOR: `eq`  \n    VALUE: `Positive Integer`\n\n* **groupId**  \n    Group ID filter  \n    OPERATOR: `eq`  \n    VALUE: `Positive Integer`\n\n* **roomId**  \n    Room ID filter  \n    OPERATOR: `eq`  \n    VALUE: `Positive Integer`\n\n* **state**  \n    Assignment state  \n    OPERATOR: `eq`  \n    VALUE: `[WAITING|DENIED]`\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **userId**: User ID\n* **groupId**: Group ID\n* **roomId**: Room ID\n* **state**: State\n\n### Example:\n* `userId:desc`  \nSort by user ID descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPendingAssignments.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "changePendingAssignments": {
+            "main": "./lib/actions/changePendingAssignments.js",
+            "title": "Handle user-room assignments per group that have not been accepted yet",
+            "description": "### Functional Description:  \nHandles a list of user-room assignments by groups that have not been approved yet  \n**WAITING** or **DENIED** assignments can be **ACCEPTED**.\n\n### Precondition:\nNone.\n\n### Effects:\nUser-room assignment is approved and the user gets access to the group.\n\n### Further Information:\nRoom administrators should regularly handle pending assignments to provide access to rooms for other users.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/changePendingAssignments.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateRoom": {
+            "main": "./lib/actions/updateRoom.js",
+            "title": "Update room",
+            "description": "### Functional Description:  \nUpdate a room's meta data.\n\n### Precondition:\nUser is admin in superordinated level.\n\n### Effects:\nRoom's meta data is changed.\n\n### Further Information:\nNone.\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateRoom.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoomActivitiesLog_1": {
+            "main": "./lib/actions/getRoomActivitiesLog_1.js",
+            "title": "Get events of a room",
+            "description": "### Use `nodes/rooms/{room_id}/events` API\n\n### Functional Description:\nRetrieve syslog (= audit log) events related to a room.\n\n### Precondition:\nRequires _\"read\"_ permissions on that room.\n\n### Effects:\nNone.\n\n### Further Information:\nOutput may be limited to a certain number of entries.  \nPlease use filter criteria and paging.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoomActivitiesLog_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "configRoom": {
+            "main": "./lib/actions/configRoom.js",
+            "title": "Config room",
+            "description": "### Functional Description:\nUpdates a room.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nRoom's configuration is changed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/configRoom.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "encryptRoom": {
+            "main": "./lib/actions/encryptRoom.js",
+            "title": "Encrypt room",
+            "description": "### Functional Description:  \nActivates the client-side encryption for a room.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nEncryption of room is activated.\n\n### Further Information:\nOnly empty rooms at the top level may be encrypted.  \nThis endpoint may also be used to disable encryption of an empty room.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/encryptRoom.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoomActivitiesLog": {
+            "main": "./lib/actions/getRoomActivitiesLog.js",
+            "title": "Get events of a room",
+            "description": "### Use `nodes/rooms/{room_id}/events` API\n\n### Functional Description:\nRetrieve syslog (= audit log) events related to a room.\n\n### Precondition:\nRequires _\"read\"_ permissions on that room.\n\n### Effects:\nNone.\n\n### Further Information:\nOutput may be limited to a certain number of entries.  \nPlease use filter criteria and paging.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoomActivitiesLog.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteRoomGroupsBatch": {
+            "main": "./lib/actions/deleteRoomGroupsBatch.js",
+            "title": "Revoke group permissions from room",
+            "description": "### Functional Description:  \nBatch function.  \nRevoke groups from room.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nGroup's permissions are revoked.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteRoomGroupsBatch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoomGroups": {
+            "main": "./lib/actions/getRoomGroups.js",
+            "title": "Get room granted groups or/and groups that can be granted",
+            "description": "### Functional Description:  \nRetrieve a list of groups that are and / or can be granted to the room.\n\n### Precondition:\nAny permissions on target room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **name**  \n    Group name  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isGranted**  \n    Filter the groups that have (no) access to this room  \n    **Attention! This filter is only available for room administrators.  \n    Other users can only look for groups in their rooms, so this filter is true and cannot be overridden.**  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **permissionsManage**  \n    Filter the groups that (don't) have manage right in this room  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`.\n\n* **effectivePerm**  \n    Filter groups with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `false`: _DIRECT_ permissions  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    \n    > _DIRECT_ means: e.g. room administrator grants read permissions to group of users **directly** on desired room.  \n    _EFFECTIVE_ means: e.g. group of users gets read permissions on desired room through **inheritance**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]` (default: `true`)\n\n* **groupId**  \n    Filter the groups by ID  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `Positive Integer`\n\n### Example:\n* `isGranted:eq:false|name:cn:searchString`  \nGet all groups that have no rights to this room of AND whose name is like `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoomGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setRoomGroupsBatch": {
+            "main": "./lib/actions/setRoomGroupsBatch.js",
+            "title": "Add or change room granted groups",
+            "description": "### Functional Description:\nBatch function.  \nAll existing group permissions will be overwritten.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nGroup's permissions are changed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setRoomGroupsBatch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "roomRescueKey": {
+            "main": "./lib/actions/roomRescueKey.js",
+            "title": "Get room emergency password",
+            "description": "### Functional Description:  \nRetrieve the room emergency password.\n\n### Precondition:\nUser has _\"read\"_ permissions in that room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/roomRescueKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteRoomUsersBatch": {
+            "main": "./lib/actions/deleteRoomUsersBatch.js",
+            "title": "Revoke user permissions from room",
+            "description": "### Functional Description:  \nBatch function.  \nRevoke users from room.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nUser's permissions are revoked.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteRoomUsersBatch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoomUsers": {
+            "main": "./lib/actions/getRoomUsers.js",
+            "title": "Get room granted users or/and users that can be granted",
+            "description": "### Functional Description:  \nRetrieve a list of users that are and / or can be granted to the room.\n\n### Precondition:\nAny permissions on target room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **displayName**  \n    User display name (`firstName`, `lastName`, `login`)  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isGranted**  \n    Filter the users that have (no) access to this room  \n    **Attention! This filter is only available for room administrators.  \n    Other users can only look for users in their rooms, so this filter is true and cannot be overridden.**  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **permissionsManage**  \n    Filter the users that (don't) have manage right in this room  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`.\n\n* **effectivePerm**  \n    Filter users with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `false`: _DIRECT_ permissions  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `any`: _DIRECT_ **AND** _EFFECTIVE_ **AND** _OVER GROUP_ permissions  \n    \n    > _DIRECT_ means: e.g. room administrator grants read permissions to user **directly** on desired room.  \n    _EFFECTIVE_ means: e.g. user gets read permissions on desired room through **inheritance**.  \n    _OVER GROUP_ means: e.g. user gets read permissions on desired room through **group membership**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `false`)\n\n* **userId**  \n    Filter the users by ID  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `Positive Integer`\n\n### Example:\n* `isGranted:eq:true|displayName:cn:searchString|permissions_manage:eq:true`  \nGet all users that have manage rights to this room of AND whose name is like `searchString`.\n\n### The filters are connected by AND",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoomUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setRoomUsersBatch": {
+            "main": "./lib/actions/setRoomUsersBatch.js",
+            "title": "Add or change room granted users",
+            "description": "### Functional Description:\nBatch function.  \nAll existing user permissions will be overwritten.\n\n### Precondition:\nUser needs to be room administrator.\n\n### Effects:\nUser's permissions are changed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setRoomUsersBatch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "searchFsNodes": {
+            "main": "./lib/actions/searchFsNodes.js",
+            "title": "Search file system nodes",
+            "description": "### Functional Description:  \nProvides a flat list of file system nodes (rooms, folders, files) of a given parent that are accessible by the current user.\n\n### Precondition:\nAuthenticated user with _\"read\"_ permissions on parent room.\n\n### Effects:\nNone.\n\n### Further Information:  \nA maximum of **500** results is returned.  \nFor more results please use paging (`offset` + `limit`).  \n`EncryptionInfo` is not provided.  \nWildcard character is the asterisk character: `*`.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE[:VALUE...]`\n\n### Fields:\n\n* **type**  \n    Node type filter  \n    OPERATOR: `eq`  \n    VALUE: `[room|folder|file]`\n\n* **fileType**  \n    File type filter (file extension)  \n    OPERATOR: `cn` (name contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n* **classification**  \n    File classification filter  \n    OPERATOR: `eq`  \n    VALUE: `[1|2|3|4]`\n    * 1 - public\n    * 2 - for internal use only\n    * 3 - confidential\n    * 4 - strictly confidential\n\n* **createdBy**  \n    Creation username filter  \n    OPERATOR: `cn` (name contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n* **createdAt**  \n    Creation data filter  \n    OPERATOR: `ge|le`  \n    VALUE: `Date (yyyy-MM-dd)`\n\n* **updatedBy**  \n    Last change username filter  \n    OPERATOR: `cn` (name contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n* **updatedAt**  \n    Last change date filter  \n    OPERATOR: `ge|le`  \n    VALUE: `Date (yyyy-MM-dd)`\n\n* **expireAt**  \n    Expire date filter  \n    OPERATOR: `ge|le`  \n    VALUE: `Date (yyyy-MM-dd)`\n\n* **size**  \n    Size filter  \n    OPERATOR: `ge|le`  \n    VALUE: `Size in bytes`\n\n* **isFavorite**  \n    Favorite filter  \n    OPERATOR: `eq`  \n    VALUE: `[true|false]`\n\n* **branchVersion**  \n    Node branch version  \n    OPERATOR: `ge|le`  \n    VALUE: `Version Number`\n\n### Example:\n* `type:eq:file|createdAt:ge:2015-01-01`  \nGet nodes where `type` equals `file` AND file was created at or after `2015-01-01`.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`   \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **name**: Node name\n* **createdBy**: Creator user name\n* **createdAt**: Creation date\n* **updatedBy**: Modifier user name\n* **updatedAt**: Modification date\n* **fileType**: File type (extension)\n* **classification**: Classification ID (for files only):  \n    * 1 - public\n    * 2 - for internal use only\n    * 3 - confidential\n    * 4 - strictly confidential\n* **size**: Node size\n* **cntAdmins**: **DEPRECATED (No Effect)** For rooms only: Number of admins\n* **cntUsers**: **DEPRECATED (No Effect)** For rooms only: Number of users\n* **nodeCntChildren**: For rooms / folders only: Number of direct children (not recursive)\n* **cntDeletedVersions**: For files / folders only: Number of deleted versions of this file/folder (not recursive)\n* **type**: Node type (room, folder, file)\n\n### Example:\n* `name:desc`  \nSort by `name` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/searchFsNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getNodesAsZip": {
+            "main": "./lib/actions/getNodesAsZip.js",
+            "title": "Generate download token for zip download",
+            "description": "### Functional Description:  \nCreate a download token to retrieve several files in one ZIP archive.\n\n### Precondition:\nUser has _\"read\"_ permissions in parent room.\n\n### Effects:\nDownload token is generated and returned.\n\n### Further Information:\nThe token is necessary to access `downloads` resources.  \nZIP download is only available for files and folders.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getNodesAsZip.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getNodesAsZipDownload": {
+            "main": "./lib/actions/getNodesAsZipDownload.js",
+            "title": "Download files/folders as ZIP",
+            "description": "### Functional Description:  \nDownload multiple files in a ZIP archive.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getNodesAsZipDownload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteNode": {
+            "main": "./lib/actions/deleteNode.js",
+            "title": "Delete file system node",
+            "description": "### Functional Description:\nDelete node (room, folder, file).\n\n### Precondition:\nAuthenticated user with _\"delete\"_ permissions on supplied nodes.\n\n### Effects:\nNode gets deleted.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteNode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFsNode": {
+            "main": "./lib/actions/getFsNode.js",
+            "title": "Get node",
+            "description": "### Functional Description:  \nGet node (room, folder, file).\n\n### Precondition:\nUser has _\"read\"_ permissions in auth parent room.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFsNode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "copyNodes": {
+            "main": "./lib/actions/copyNodes.js",
+            "title": "Copy file system nodes",
+            "description": "### Functional Description:\nCopies nodes (folder, file) to another parent.\n\n### Precondition:\nAuthenticated user with _\"read\"_ permissions in the source parent and _\"create\"_ permissions in the target parent node.\n\n### Effects:\nNodes are copied to target parent.\n\n### Further Information:\nNodes must be in same source parent.  \nRooms cannot be copied.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/copyNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "emptyDeletedNodes": {
+            "main": "./lib/actions/emptyDeletedNodes.js",
+            "title": "Empty Recycle Bin",
+            "description": "### Functional Description:  \nEmpty a Recycle Bin.\n\n### Precondition:\nUser has _\"delete recycle bin\"_ permissions in parent room.\n\n### Effects:\nAll files in the Recycle Bin are permanently removed.\n\n### Further Information:\nActually removes the previously deleted files from the system.  \nThis action is irreversible.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/emptyDeletedNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFsDeletedNodesSummary": {
+            "main": "./lib/actions/getFsDeletedNodesSummary.js",
+            "title": "Get deleted nodes",
+            "description": "### Functional Description:  \nRetrieve a list of deleted nodes in a Recycle Bin.\n\n### Precondition:\nUser can access parent room and has _\"read recycle bin\"_ permissions.\n\n### Effects:\nNone.\n\n### Further Information:\nOnly room IDs are accepted as node ID since only rooms have Recycle Bins.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE[:VALUE...]`\n\n### Fields:\n\n* **type**  \n    Node type filter  \n    OPERATOR: `eq` (multiple values allowed)  \n    VALUE: `[folder|file]`\n\n* **name**  \n    Node name filter  \n    OPERATOR: `cn` (Node name contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n* **parentPath**  \n    Parent path filter  \n    OPERATOR: `cn` (Parent path contains value, multiple values not allowed)  \n    VALUE: `Search string`\n\n### Example:\n* `type:eq:file:folder|name:cn:searchString_1|parentPath:cn:searchString_2`  \nGet deleted nodes where type equals `file` or `folder` AND deleted node name containing `searchString_1` AND deleted node parent path containing `searchString 2`.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **name**: Node name\n* **cntVersions**: Number of deleted versions of this file\n* **firstDeletedAt**: First deleted version\n* **lastDeletedAt**: Last deleted version\n* **parentPath**: Parent path of deleted node\n\n### Example:\n* `name:desc`  \nSort by `name` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFsDeletedNodesSummary.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getFsDeletedNodeVersions": {
+            "main": "./lib/actions/getFsDeletedNodeVersions.js",
+            "title": "Get deleted versions",
+            "description": "### Functional Description:  \nRetrieve all deleted versions of a node.\n\n### Precondition:\nUser can access parent room and has _\"read recycle bin\"_ permissions.\n\n### Effects:\nNone.\n\n### Further Information:\nThe node is identified by three parameters:\n* parent ID\n* name\n* type (file, folder).\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **expireAt**:Expiration date\n* **accessedAt**: Last access date\n* **size**: Node size\n* **classification**: Classification ID (for files only):  \n    * 1 - public\n    * 2 - for internal use only\n    * 3 - confidential\n    * 4 - strictly confidential\n* **createdAt**: Creation date\n* **createdBy**: Node created by user\n* **updatedAt**: Modification date\n* **updatedBy**: Node modified by user\n* **deletedAt**: Deleted date\n* **deletedBy**: Node deleted by user\n\n### Example:\n* `expireAt:desc`  \nSort by `expireAt` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getFsDeletedNodeVersions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unmarkFavorite": {
+            "main": "./lib/actions/unmarkFavorite.js",
+            "title": "Unmark a node (room, folder or file) as favorite",
+            "description": "### Functional Description:\nUnmarks a node (room, folder, file) as favorite.\n\n### Precondition:\nUser needs _\"read\"_ permissions on that node.\n\n### Effects:\nA node gets unmarked as favorite.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unmarkFavorite.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addFavorite": {
+            "main": "./lib/actions/addFavorite.js",
+            "title": "Mark a node (room, folder or file) as favorite",
+            "description": "### Functional Description:  \nMarks a node (room, folder, file) as favorite.\n\n### Precondition:\nUser needs _\"read\"_ permissions on that node.\n\n### Effects:\nA node gets marked as favorite.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addFavorite.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "moveNodes": {
+            "main": "./lib/actions/moveNodes.js",
+            "title": "Move file system nodes",
+            "description": "### Functional Description:  \nMoves nodes (folder, file) to another parent.\n\n### Precondition:\nAuthenticated user with _\"read\"_ and _\"delete\"_ permissions in the source parent and _\"create\"_ permissions in the target parent node.\n\n### Effects:\nNodes are moved to target parent.\n\n### Further Information:\nNodes must be in same source parent.  \nRooms cannot be moved.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/moveNodes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCustomers": {
+            "main": "./lib/actions/getCustomers.js",
+            "title": "Get customers",
+            "description": "### Functional Description:  \nReceive a list of customers.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nThis list returns a maximum of **1000** entries.  \nPlease use filters or searches to specify what you are looking for.  \nAuthentication with `X-Sds-Service-Token` required.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE[:VALUE...]`\n\n### Fields:\n\n* **id**  \n    Customer ID filter  \n    OPERATOR: `eq`  \n    VALUE: `Positive Integer`\n\n* **companyName**  \n    Company name filter  \n    OPERATOR: `cn` (Company name contains value, multiple values not allowed)  \n    VALUE: `search string`\n\n* **customerContractType**  \n    Customer contract type filter  \n    OPERATOR: `eq`  \n    VALUE: `demo|free|pay`\n\n* **activationCode**  \n    Activation code filter  \n    OPERATOR: `cn|eq` (Activation code contains value | equals value, multiple values not allowed )  \n    VALUE: `search string`\n\n* **trialDaysLeft**  \n    Left trial days filter  \n    OPERATOR: `ge|le` (Number of trial days is greater or equal | less or equal)  \n    VALUE: `Positive Integer`\n\n* **providerCustomerId**  \n    Provider Customer ID filter  \n    OPERATOR: `cn|eq` (providerCustomerId contains value | equals value, multiple values not allowed )  \n    VALUE: `search string`\n\n* **quotaMax**  \n    Maximum quota filter  \n    OPERATOR: `ge|le` (Quota is greater or equal | less or equal)  \n    VALUE: `Positive Integer`\n\n* **quotaUsed**  \n    Used quota filter  \n    OPERATOR: `ge|le` (Quota is greater or equal | less or equal)  \n    VALUE: `Positive Integer`\n\n* **userMax**  \n    Maximum user filter  \n    OPERATOR: `ge|le` (User maximum is greater or equal | less or equal)  \n    VALUE: `Positive Integer`\n\n* **userUsed**  \n    Used users filter  \n    OPERATOR: `ge|le` (Number of registered users is greater or equal | less or equal)  \n    VALUE: `Positive Integer`\n\n* **lockStatus**  \n    Lock status filter  \n    OPERATOR: `eq`  \n    VALUE: `Integer (0 or 1)`\n\n* **createdAt**  \n    Creation date filter  \n    OPERATOR: `ge|le` (Date is greater or equal | less or equal)  \n    VALUE: `Date`\n\n* **updatedAt**  \n    Update date filter  \n    OPERATOR: `ge|le` (Date is greater or equal | less or equal)  \n    VALUE: `Date`\n\n* **lastLoginAt**  \n    Last login filter  \n    OPERATOR: `ge|le` (Date is greater or equal | less or equal)  \n    VALUE: `Date`\n\n* **userLogin**  \n    User login filter  \n    OPERATOR: `eq` (Customer user login name equal value, multiple values not allowed)  \n    Search user all logins e.g. `sql`, `active_directory`, `radius`  \n    VALUE: `search string`\n    \n* **attributeKey**  \n    Customer attribute key filter  \n    OPERATOR: `eq` (Customer attribute key equal value, multiple values not allowed)  \n    Search customers with given customer attribute key.  \n    VALUE: `search string`\n\n* **attributeValue**  \n    Customer attribute value filter  \n    OPERATOR: `eq` (Customer attribute value equal value, multiple values not allowed)  \n    Search customers with given customer attribute value.  \n    VALUE: `search string`\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields not supported.\n\n### Sort fields:\n\n* **companyName**: Company name\n* **customerContractType**: Customer contract type\n* **trialDaysLeft**: Number of remaining trial days (demo customers)\n* **providerCustomerId**: Provider Customer ID (pay customers)\n* **quotaMax**: Maximum quota\n* **quotaUsed**: Currently used quota\n* **userMax**: Maximum user number\n* **userUsed**: Number of currently active users\n* **lockStatus**: Lock status of customer\n* **createdAt**: Creation date\n* **updatedAt**: Date of last update\n* **lastLoginAt**: Date of last login of any user of this customer\n\n### Example:\n* `companyName:desc`  \nSort by company `name` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCustomers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "newCustomerRequest": {
+            "main": "./lib/actions/newCustomerRequest.js",
+            "title": "Create customer",
+            "description": "### Functional Description:\nCreate a new customer.\n\n### Precondition:\nNone.\n\n### Effects:\nA new customer is created.\n\n### Further Information:\nAuthentication with `X-Sds-Service-Token` required.  \nIf no company name is set, first name of the first administrator is used.  \nMax quota has to be at least 1 GB (= 1 073 741 824 B).\n\n### Authentication Method Options\n\n* **SQL**  \n    `none`\n\n* **Active Directory**  \n    (optional)  \n    key: `\"ad_config_id\"`  \n    value: \"Active Directory configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"Active Directory user name according to auth setting `userFilter`\"\n\n* **RADIUS**  \n    key: `\"username\"`  \n    value: \"Radius user name\"\n\n* **OpenID Connect**  \n    key: `\"openid_config_id\"`  \n    value: \"OpenID Connect configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"OpenID Connect user name according to auth setting `mappingClaim`\"",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/newCustomerRequest.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteCustomer": {
+            "main": "./lib/actions/deleteCustomer.js",
+            "title": "Delete customer",
+            "description": "### Functional Description:\nDelete a customer.\n\n### Precondition:\nNone.\n\n### Effects:\nCustomer is deleted.\n\n### Further Information:\nAuthentication with `X-Sds-Service-Token` required.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteCustomer.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCustomer": {
+            "main": "./lib/actions/getCustomer.js",
+            "title": "Get customer",
+            "description": "### Functional Description:  \nReceive details of a selected customer.\n\n### Precondition:\nExisting customer.\n\n### Effects:\nNone.\n\n### Further Information:\nAuthentication with `X-Sds-Service-Token` required.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCustomer.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateCustomer": {
+            "main": "./lib/actions/updateCustomer.js",
+            "title": "Update customer",
+            "description": "### Functional Description:  \nChange selected attributes of a customer.\n\n### Precondition:\nExisting customer.\n\n### Effects:\nUpdate of attributes.\n\n### Further Information:\nAuthentication with `X-Sds-Service-Token` required.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateCustomer.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setAllCustomerAttributes": {
+            "main": "./lib/actions/setAllCustomerAttributes.js",
+            "title": "Set customer attributes",
+            "description": "### Functional Description:  \nSet custom customer attributes.\n\n### Precondition:\nRight _\"change global config\"_ required.\n\n### Effects:\nCustom customer attributes gets set.\n\n### Further Information:\nBatch function.  \nAll existing customer attributes will be deleted.  \nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setAllCustomerAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setCustomerAttributes": {
+            "main": "./lib/actions/setCustomerAttributes.js",
+            "title": "Add or edit customer attributes",
+            "description": "### Functional Description:  \nAdd or edit custom customer attributes.\n\n### Precondition:\nRight _\"change global config\"_ required.\n\n### Effects:\nCustom customer attributes get added or edited.\n\n### Further Information:\nBatch function.  \nIf an entry exists before, it will be overwritten.  \nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setCustomerAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteCustomerAttributes": {
+            "main": "./lib/actions/deleteCustomerAttributes.js",
+            "title": "Delete customer attributes",
+            "description": "### Functional Description:\nDelete custom customer attribute.\n\n### Precondition:\nRight _\"change global config\"_ required.\n\n### Effects:\nCustom customer attribute gets deleted.\n\n### Further Information:\nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteCustomerAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCustomerUsers": {
+            "main": "./lib/actions/getCustomerUsers.js",
+            "title": "Get customer users",
+            "description": "### Functional Description:  \nReceive a list of users associated with a certain customer.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nAuthentication with `X-Sds-Service-Token` required.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields are supported.\n\n### Filter fields:\n\n* **login**  \n    Login name  \n    OPERATOR: `cn` (User login name contains value)  \n    VALUE: `Search string`\n\n* **firstName**  \n    First name  \n    OPERATOR: `cn` (User first name contains value)  \n    VALUE: `Search string`\n\n* **lastName**  \n    Last name  \n    OPERATOR: `cn` (User last name contains value)  \n    VALUE: `Search string`\n\n* **lockStatus**  \n    Lock status:\n    * 0 - Locked\n    * 1 - Web access allowed\n    * 2 - Web and mobile access allowed,  \n    \n    OPERATOR: `eq` (User lock status)  \n    VALUE: `[0|1|2]`.\n\n* **effectiveRoles**  \n    Filter users with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ roles  \n    * `false`: _DIRECT_ roles  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ roles  \n\n    > _DIRECT_ means: e.g. user gets role **directly** granted from someone with _grant permission_ right.  \n    _EFFECTIVE_ means: e.g. user gets role through **group membership**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]` (default: `false`)\n\n\n### Logical grouping:\nFiltering according first three fields (`login`, `lastName`, `firstName`) is intrinsically processed by the API as logical _OR_.  \nIn opposite, filtering according to last three field (`lockStatus`) is processed intrinsically as logical _AND_.\n\n### Example:\n* `login:cn:searchString_1|firstName:cn:searchString_2|lockStatus:eq:2`  \nFilter by `login` contains `searchString_1` or `firstName` contains `searchString_2` and user are not locked.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields are supported.\n\n### Sort fields:\n\n* **login**: Login name\n* **firstName**: First name\n* **lastName**: Last name\n* **gender**: Gender\n* **lockStatus**: User lock status\n* **lastLoginSuccessAt**: Last successful logon date\n* **expireAt**: Expiration date\n\n### Example:\n* `firstName:asc|lastLoginSuccessAt:desc`  \nSort by `firstName` ascending and by `lastLoginSuccessAt` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCustomerUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getBrandingServerInfo": {
+            "main": "./lib/actions/getBrandingServerInfo.js",
+            "title": "Get branding info",
+            "description": "### Functional Description:  \nPublic branding information.\n\n### Precondition:\nNone.\n\n### Effects:\nIf `brandingServerBrandingId` is set, `brandingServerCustomer` is not supplied.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getBrandingServerInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPublicDownloadShare": {
+            "main": "./lib/actions/getPublicDownloadShare.js",
+            "title": "Get public Download Share info",
+            "description": "### Functional Description:  \nRetrieve the public information of a Download Share.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPublicDownloadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createPublicDownloadShareToken": {
+            "main": "./lib/actions/createPublicDownloadShareToken.js",
+            "title": "Generate download token",
+            "description": "### Functional Description:\nGenerate a download token to retrieve a shared file.\n\n### Precondition:\nNone.\n\n### Effects:\nDownload token is generated and returned.\n\n### Further Information:\nAfter generating the download token a download is possible with:\n* `GET /public/shares/downloads/{access_key}/{token}`",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createPublicDownloadShareToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPublicFileData": {
+            "main": "./lib/actions/getPublicFileData.js",
+            "title": "Download file",
+            "description": "### Functional Description:  \nDownload a file.\n\n### Precondition:\nValid download token.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPublicFileData.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPublicFileData_1": {
+            "main": "./lib/actions/getPublicFileData_1.js",
+            "title": "Download file",
+            "description": "### Functional Description:  \nDownload a file.\n\n### Precondition:\nValid download token.\n\n### Effects:\nNone.\n\n### Further Information:\nRange requests are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPublicFileData_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPublicUploadShare": {
+            "main": "./lib/actions/getPublicUploadShare.js",
+            "title": "Get public Upload Share info",
+            "description": "### Functional Description:  \nProvides information about the desired Upload Share.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nIf no password is set, the returned information is reduced to the following attributes (if available):\n\n* **name**\n* **maxSlots**\n* **createdAt**\n* **isProtected**\n* **isEncrypted**\n* **showUploadedFiles**\n* **userUserPublicKeyList** (if parent is end-to-end encrypted)\n\nOnly if the password is transmitted as `X-Sds-Share-Password` header, all values are returned.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPublicUploadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createShareUpload": {
+            "main": "./lib/actions/createShareUpload.js",
+            "title": "Create new file upload channel",
+            "description": "### Functional Description:  \nCreate a new upload channel.\n\n### Precondition:\nNone.\n\n### Effects:\nUpload channel is created and corresponding token / upload ID returned.\n\n### Further Information:\nThe token from the response can be used at:\n\n* `POST /uploads/{token}`\n* `PUT /uploads/{token}`\n* `DELETE /uploads/{token}`\n\nPlease provide the size of the intended upload so that the quota can be checked in advanced and no data is transferred unnecessarily.\n\n### Node naming convention\n\n* Node (room, folder, file) names are limited to 150 characters.\n\n* Not allowed names:  \n`'CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9','.','/'`\n\n* Not allowed characters in names:  \n`'../', '\\\\', '<','>', ':', '\\\"', '|', '?', '*', '/'`\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createShareUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cancelShareUpload": {
+            "main": "./lib/actions/cancelShareUpload.js",
+            "title": "Cancel file upload",
+            "description": "### Functional Description:\nAbort (chunked) upload via Upload Share.\n\n### Precondition:\nValid Upload ID.\n\n### Effects:\nAborts upload and invalidates upload ID / token.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cancelShareUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "uploadShare": {
+            "main": "./lib/actions/uploadShare.js",
+            "title": "Upload file",
+            "description": "### Functional Description:  \nChunked upload of files via Upload Share.\n\n### Precondition:\nValid upload ID.\n\n### Effects:\nChunk of file is uploaded.\n\n### Further Information:\nChunked uploads (range requests) are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/uploadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "completeShareUpload": {
+            "main": "./lib/actions/completeShareUpload.js",
+            "title": "Complete file upload",
+            "description": "### Functional Description:\nFinalize (chunked) upload via Upload Share.\n\n### Precondition:\nValid upload ID.\n\n### Effects:\nFinalizes upload.\n\n### Further Information:\nChunked uploads (range requests) are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).  \n\nPlease ensure that all chunks have been transferred correctly before finishing the upload.  \nIf file hash has been created in time a `201 Created` will be responded and hash will be part of response, otherwise it will be a `202 Accepted` without it.\n\n### 200 OK is not used by this API",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/completeShareUpload.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSoftwareVersion": {
+            "main": "./lib/actions/getSoftwareVersion.js",
+            "title": "Get software version info",
+            "description": "### Functional Description:  \nPublic software version information.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nThe version of DRACOON Server consists of two components:\n* **API**\n* **Core** (refered to as _\"Server\"_)\n\nthat are versioned individually.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSoftwareVersion.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSystemInfo": {
+            "main": "./lib/actions/getSystemInfo.js",
+            "title": "Get system information",
+            "description": "### Functional Description:  \nProvides information about system.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSystemInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getActiveDirectoryAuthInfo": {
+            "main": "./lib/actions/getActiveDirectoryAuthInfo.js",
+            "title": "Get Active Directory authentication information",
+            "description": "### Functional Description:  \nProvides information about Active Directory authentication options.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getActiveDirectoryAuthInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOpenIdAuthInfo": {
+            "main": "./lib/actions/getOpenIdAuthInfo.js",
+            "title": "Get OpenID Connect authentication information",
+            "description": "### Functional Description:  \nProvides information about OpenID Connect authentication options.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOpenIdAuthInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSdsServerTime": {
+            "main": "./lib/actions/getSdsServerTime.js",
+            "title": "Get system time",
+            "description": "### Functional Description:  \nRetrieve the actual server time.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSdsServerTime.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoles": {
+            "main": "./lib/actions/getRoles.js",
+            "title": "Get all roles and to the role assignment rights",
+            "description": "### Functional Description:  \nRetrieve a list of all Roles and the role assignment rights.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoles.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteRoleGroups": {
+            "main": "./lib/actions/deleteRoleGroups.js",
+            "title": "Revoke groups role",
+            "description": "### Functional Description:  \nRemoves one or more groups from a role.\n\n### Precondition:\nRole _\"Group Manager\"_ required.  \nFor each role, at least one non-expiring user must remain who keeps the role.\n\n### Effects:\nOne or more groups will be removed from a role.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteRoleGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoleGroups": {
+            "main": "./lib/actions/getRoleGroups.js",
+            "title": "Get role groups",
+            "description": "### Functional Description:  \nGet all groups of a role.\n\n### Precondition:\nRight _\"read groups\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **isMember**  \n    Filter the groups which are / aren't member of that role  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **name**  \n    Group name  \n    OPERATOR: `cn` (Group name contains value; multiple values not allowed)  \n    VALUE: `Search string`\n\n### Example:\n* `isMember:eq:false|name:cn:searchString`  \nGet all groups that are not a member of that role AND whose `name` contains `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoleGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addRoleGroups": {
+            "main": "./lib/actions/addRoleGroups.js",
+            "title": "Add groups to the role",
+            "description": "### Functional Description:\nAdds one or more groups to a role.\n\n### Precondition:\nRight _\"grant permission on groups\"_ required.\n\n### Effects:\nOne or more groups will be added to a role.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addRoleGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteRoleUsers": {
+            "main": "./lib/actions/deleteRoleUsers.js",
+            "title": "Revoke users role",
+            "description": "### Functional Description:  \nRemoves one or more users from a role.\n\n### Precondition:\nRole _\"User Manager\"_ required.  \nFor each role, at least one non-expiring user must remain who keeps the role.\n\n### Effects:\nOne or more users will be removed from a role.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteRoleUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRoleUsers": {
+            "main": "./lib/actions/getRoleUsers.js",
+            "title": "Get role users",
+            "description": "### Functional Description:  \nGet all users of a role.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **isMember**  \n    Filter the users which are / aren't member of that role  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **displayName**  \n    User display name (firstName, lastName, login)  \n    OPERATOR: `cn` (User display name contains value; multiple values not allowed)  \n    VALUE: `Search string`\n\n### Example:\n* `isMember:eq:false|displayName:cn:searchString`  \nGet all users that are not member of that role AND whose display name contains `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRoleUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "addRoleUsers": {
+            "main": "./lib/actions/addRoleUsers.js",
+            "title": "Add users to the role",
+            "description": "### Functional Description:\nAdds one or more users to a role.\n\n### Precondition:\nRight _\"grant permission on users\"_ required.\n\n### Effects:\nOne or more users will be added to a role.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/addRoleUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDownloadShares": {
+            "main": "./lib/actions/getDownloadShares.js",
+            "title": "Get Download Shares",
+            "description": "### Functional Description:  \nRetrieve a list of Download Shares.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filters\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields is supported.\n\n### Filter fields:\n\n* **name**  \n    Alias Name or File Name  \n    OPERATOR: `cn` ( name contains value)  \n    VALUE: `Search string`\n\n* **createdBy**  \n    Creator info  \n    OPERATOR: `cn` (Creator info (`login`, `email`, `firstName`, `lastName`) contains value)  \n    VALUE: `Search string`\n\n* **accessKey**  \n    Share access key  \n    OPERATOR: `cn` (Share access key contains value)  \n    VALUE: `Search string`\n\n* **nodeId**  \n    Source node ID  \n    OPERATOR: `eq` (Source file / folder / room ID)  \n    VALUE: `Search node ID`\n\n* **userId**  \n    Creator user ID  \n    OPERATOR: `eq`  \n    VALUE: `Search user ID`\n\n### Example:\n* `name:cn:searchString_1|createdBy:cn:searchString_2|nodeId:eq:1`  \nFilter by file `name` contains `searchString_1` OR creator info (`login`, `email`, `firstName`, `lastName`) contains `searchString_2` OR node ID is equal to `1`.\n\n### Sorting\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields is supported.\n\n### Sort fields:\n\n* **name**: Alias Name or File Name\n* **classification**: Classification ID (for files only):  \n    * 1 - public\n    * 2 - for internal use only\n    * 3 - confidential\n    * 4 - strictly confidential\n* **notifyCreator**: Notify creator on every download\n* **expireAt**: Expiration date\n* **createdAt**: Creation date\n* **createdBy**: Creator info\n\n### Example:\n* `name:asc|expireAt:desc`  \nSort by `name` ascending and by `expireAt` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDownloadShares.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createDownloadShare": {
+            "main": "./lib/actions/createDownloadShare.js",
+            "title": "Create new Download Share",
+            "description": "### Functional Description:\nCreate a new Download Share.\n\n### Precondition:\nUser with _\"manage download share\"_ permissions on target node.\n\n### Effects:\nDownload Share created.\n\n### Further Information:\n\n* **Access password:** limited to **150** characters.\n* **Notes:** limited to **255** characters.\n* **Alias names:** limited to **150** characters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createDownloadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteDownloadShare": {
+            "main": "./lib/actions/deleteDownloadShare.js",
+            "title": "Delete Download Share",
+            "description": "### Functional Description:\nDelete a Download Share.\n\n### Precondition:\nNone.\n\n### Effects:\nDownload Share is deleted.\n\n### Further Information:\nOnly the Download Share is removed; the referenced file or container persists.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteDownloadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDownloadShare": {
+            "main": "./lib/actions/getDownloadShare.js",
+            "title": "Get Download Share",
+            "description": "### Functional Description:  \nRetrieve detailed information about one Download Share.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDownloadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDownloadShareQr": {
+            "main": "./lib/actions/getDownloadShareQr.js",
+            "title": "Get Download Share via QR Code",
+            "description": "### Functional Description:  \nRetrieve detailed information about one Download Share.\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDownloadShareQr.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUploadShares": {
+            "main": "./lib/actions/getUploadShares.js",
+            "title": "Get Upload Shares",
+            "description": "### Functional Description:  \nRetrieve a list of Upload Shares (aka Upload Accounts).\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filters\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields is supported.\n\n### Filter fields:\n\n* **name**  \n    Alias name  \n    OPERATOR: `cn` (Alias name contains value)  \n    VALUE: `search string`\n\n* **createdBy**  \n    Creator info  \n    OPERATOR: `cn` (Creator info (`login`, `email`, `firstName`, `lastName`) contains value)  \n    VALUE: `search string`\n\n* **accessKey**  \n    Share access key  \n    OPERATOR: `cn` (Share access key contains value)  \n    VALUE: `search string`\n\n* **targetId**  \n    Target node (room, folder)  \n    **DEPRECATED** OPERATOR: `cn` (Target node contains value)  \n    **NEW** OPERATOR: `eq` (Target node equal value)  \n    VALUE: `search string`\n\n* **userId**  \n    Creator user ID  \n    OPERATOR: `eq`  \n    VALUE: `Search user ID`\n\n### Example:\n* `name:cn:searchString_1|createdBy:cn:searchString_2`  \nFilter by alias `name` contains `searchString_1` OR creator info (`login`, `email`, `firstName`, `lastName`) contains `searchString_2`.\n\n### Sorting\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields is supported.\n\n### Sort fields:\n\n* **name**: Alias name\n* **expireAt**: Expiration date\n* **notifyCreator**: Notify creator on every upload.\n* **createdAt**: Creation date\n* **createdBy**: Creator info\n\n### Example:\n* `name:asc|expireAt:desc`  \nSort by `name` ascending AND by `expireAt` descending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUploadShares.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createUploadShare": {
+            "main": "./lib/actions/createUploadShare.js",
+            "title": "Create new Upload Share",
+            "description": "### Functional Description:\nCreate a new Upload Share (aka Upload Account).\n\n### Precondition:\nUser has _\"manage upload share\"_ permissions on target container.\n\n### Effects:\nUpload Share is created.\n\n### Further Information:\n\n* **Notes:** limited to **255** characters.\n* **Alias Names:** are limited to **150** characters.\n* **Send Mail:**:  \n    * If `sendMail` is set to `false`: `mailRecipients`; `mailSubject`; `mailBody` are **optional**.  \n    * If `sendMail` is set to `true`: `mailRecipients`; `mailSubject`; `mailBody` are **mandatory**.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createUploadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteUploadShare": {
+            "main": "./lib/actions/deleteUploadShare.js",
+            "title": "Delete Upload Share",
+            "description": "### Functional Description:\nDelete an Upload Share (aka Upload Account).\n\n### Precondition:\nNone.\n\n### Effects:\nUpload Share is deleted.\n\n### Further Information:\nOnly the Upload Share is removed; already uploaded files and the target container persist.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteUploadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUploadShare": {
+            "main": "./lib/actions/getUploadShare.js",
+            "title": "Get Upload Share",
+            "description": "### Functional Description:  \nRetrieve detailed information about one Upload Share (aka Upload Account).\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUploadShare.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUploadShareQr": {
+            "main": "./lib/actions/getUploadShareQr.js",
+            "title": "Get Upload Share via QR Code",
+            "description": "### Functional Description:  \nRetrieve detailed information about one Upload Share (aka Upload Account).\n\n### Precondition:\nNone.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUploadShareQr.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAuditNodeUserData_1": {
+            "main": "./lib/actions/getAuditNodeUserData_1.js",
+            "title": "Get node assigned users with permissions",
+            "description": "### Functional Description:  \nRetrieve a list of all nodes of type `room` and the room assignment users with permissions.\n\n### Precondition:\nRight _\"read audit log\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields are supported.\n\n### Filter fields:\n\n* **nodeId**  \n    Node ID  \n    OPERATOR: `eq` (Node ID equal value)  \n    VALUE: `Search string`\n\n* **nodeName**  \n    Node name (Login)  \n    OPERATOR: `cn|eq` (Node name contains value | equal value)  \n    VALUE: `Search string`\n\n* **nodeParentId**  \n    Node parent ID  \n    OPERATOR: `eq` (Parent ID equal value; parent ID 0 is the root node.)  \n    VALUE: `Search string`\n\n* **userId**  \n    User ID  \n    OPERATOR: `eq` (User ID equal value)  \n    VALUE: `Search string`\n\n* **userName**  \n    User name (Login)  \n    OPERATOR: `cn|eq` (User name contains value | equal value)  \n    VALUE: `Search string`\n\n* **userFirstName**  \n    User first name  \n    OPERATOR: `cn|eq` (User first name contains value | equal value)  \n    VALUE: `Search string`\n\n* **userLastName**  \n    User last name  \n    OPERATOR: `cn|eq` (User last name contains value | equal value)  \n    VALUE: `Search string`\n\n* **permissionsManage**  \n    Filter the users that (don't) have manage right in this room  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n* **nodeIsEncrypted**  \n    Encrypted node filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n* **nodeHasRecycleBin**  \n    Recycle bin filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n    \n* **nodeHasActivitiesLog**  \n    Activities log filter  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]`\n\n### Logical grouping:\nFiltering according first three fields (`login`, `lastName`, `firstName`) is intrinsically processed by the API as logical _OR_.  \nIn opposite, filtering according to is processed intrinsically as logical _AND_.\n\n### Example:\n* `userName:cn:searchString_1|userFirstName:cn:searchString_2|nodeId:eq:2`  \nFilter by user login containing `searchString_1` OR first name containing `searchString_2` and node ID equal 2.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields are supported.\n\n### Sort fields:\n\n* **nodeId**: Node ID\n* **nodeName**: Node name\n* **nodeParentId**: Node parent ID\n* **nodeSize**: Node size\n* **nodeQuota**: Node quota\n\n### Example:\n* `nodeName:asc`  \nSort by `nodeName` ascending.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAuditNodeUserData_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSyslogEvents": {
+            "main": "./lib/actions/getSyslogEvents.js",
+            "title": "Get system events",
+            "description": "### Functional Description:  \nRetrieve eventlog (= audit log) events.\n\n### Precondition:\nRole _\"Log Auditor\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nOutput may be limited to a certain number of entries.  \nPlease use filter criteria and paging.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSyslogEvents.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getLogOperations_1": {
+            "main": "./lib/actions/getLogOperations_1.js",
+            "title": "Get allowed Log Operations",
+            "description": "### Functional Description:  \nRetrieve eventlog (= audit log) operation IDs and the associated log operation description.\n\n### Precondition:\nRole _\"Log Auditor\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getLogOperations_1.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "testAdConfig": {
+            "main": "./lib/actions/testAdConfig.js",
+            "title": "Test active directory configuration",
+            "description": "### Functional Description:  \nTest AD configuration.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nNone.\n\n### Further Information:\nDRACOON tries to establish a connection with the provided information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/testAdConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "testRadiusConfig": {
+            "main": "./lib/actions/testRadiusConfig.js",
+            "title": "Test RADIUS server availability",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/testRadiusConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAdConfigs": {
+            "main": "./lib/actions/getAdConfigs.js",
+            "title": "Get active directory configuration",
+            "description": "### Functional Description:  \nRetrieve a list of configured ADs.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAdConfigs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createAdConfig": {
+            "main": "./lib/actions/createAdConfig.js",
+            "title": "Create active directory configuration",
+            "description": "### Functional Description:\nCreate a new AD configuration.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nNew AD configuration created.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createAdConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteAdConfig": {
+            "main": "./lib/actions/deleteAdConfig.js",
+            "title": "Delete active directory configuration",
+            "description": "### Functional Description:\nDelete an existing AD configuration.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nAD configuration removed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteAdConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAuthAdSetting": {
+            "main": "./lib/actions/getAuthAdSetting.js",
+            "title": "Get active directory configuration",
+            "description": "### Functional Description:  \nRetrieve the configuration of a AD.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAuthAdSetting.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateAuthAdSetting": {
+            "main": "./lib/actions/updateAuthAdSetting.js",
+            "title": "Update active directory configuration",
+            "description": "### Functional Description:  \nUpdate an existing AD configuration.\n\n### Precondition:\nRole _Config Manager_.\n\n### Effects:\nAD configuration updated.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateAuthAdSetting.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOpenIdIdpConfigs": {
+            "main": "./lib/actions/getOpenIdIdpConfigs.js",
+            "title": "Get OpenID IDP configurations",
+            "description": "### Functional Description:  \nRetrieve a list of configured OpenID Connect IDPs.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOpenIdIdpConfigs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createOpenIdIdpConfig": {
+            "main": "./lib/actions/createOpenIdIdpConfig.js",
+            "title": "Create OpenID IDP configuration",
+            "description": "### Functional Description:\nCreate a new OpenID Connect IDP configuration.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNew OpenID Connect IDP configuration is created.\n\n### Further Information:\nSee [http://openid.net/developers/specs](http://openid.net/developers/specs) for further information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createOpenIdIdpConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteOpenIdIdpConfig": {
+            "main": "./lib/actions/deleteOpenIdIdpConfig.js",
+            "title": "Delete OpenID IDP configuration",
+            "description": "### Functional Description:\nDelete an existing OpenID Connect IDP configuration.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nOpenID Connect IDP configuration removed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteOpenIdIdpConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOpenIdIdpConfig": {
+            "main": "./lib/actions/getOpenIdIdpConfig.js",
+            "title": "Get OpenID IDP configuration",
+            "description": "### Functional Description:  \nRetrieve an OpenID Connect IDP configuration.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOpenIdIdpConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateOpenIdIdpConfig": {
+            "main": "./lib/actions/updateOpenIdIdpConfig.js",
+            "title": "Update OpenID IDP configuration",
+            "description": "### Functional Description:  \nUpdate an existing OpenID Connect IDP configuration.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nOpenID Connect IDP configuration is updated.\n\n### Further Information:\nSee [http://openid.net/developers/specs](http://openid.net/developers/specs) for further information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateOpenIdIdpConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DeteteRadiusConfig": {
+            "main": "./lib/actions/DeteteRadiusConfig.js",
+            "title": "Delete RADIUS Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DeteteRadiusConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetRadiusConfig": {
+            "main": "./lib/actions/GetRadiusConfig.js",
+            "title": "Get RADIUS Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetRadiusConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "create": {
+            "main": "./lib/actions/create.js",
+            "title": "Create RADIUS Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "UpdateRadiusConfig": {
+            "main": "./lib/actions/UpdateRadiusConfig.js",
+            "title": "Update RADIUS Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/UpdateRadiusConfig.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOAuthClients": {
+            "main": "./lib/actions/getOAuthClients.js",
+            "title": "Get OAuth clients",
+            "description": "### Functional Description:  \nRetrieve a list of configured OAuth clients.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOAuthClients.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createOAuthClient": {
+            "main": "./lib/actions/createOAuthClient.js",
+            "title": "Create OAuth client",
+            "description": "### Functional Description:\nCreate a new OAuth client.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNew OAuth client created.\n\n### Further Information:  \nClient secret must have:  \n* at least 12 characters, at most 32 characters  \n* only lower case characters, upper case characters and digits  \n* at least 1 lower case character, 1 upper case character and 1 digit  \n\nThe client secret is optional and will be generated if it is left empty.  \n\nValid grant types are:  \n* **authorization_code**  \n* **implicit**  \n* **password**  \n* **client_credentials**  \n* **refresh_token**  \n\nGrant type `client_credentials` is actually not permitted!  \n\nDefault access token validity: **8 hours**  \nDefault refresh token validity: **30 days**",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createOAuthClient.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteOAuthClient": {
+            "main": "./lib/actions/deleteOAuthClient.js",
+            "title": "Delete OAuth client",
+            "description": "### Functional Description:\nDelete an existing OAuth client.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nOAuth client removed.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteOAuthClient.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOAuthClient": {
+            "main": "./lib/actions/getOAuthClient.js",
+            "title": "Get OAuth client",
+            "description": "### Functional Description:  \nRetrieve the configuration of an OAuth client.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOAuthClient.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateOAuthClient": {
+            "main": "./lib/actions/updateOAuthClient.js",
+            "title": "Update OAuth client",
+            "description": "### Functional Description:  \nUpdate an existing OAuth client.\n\n### Precondition:\nRole _Config Manager_ of the Provider Customer.\n\n### Effects:\nOAuth client updated.\n\n### Further Information:  \nClient secret must have:  \n* at least 12 characters, at most 32 characters  \n* only lower case characters, upper case characters and digits  \n* at least 1 lower case character, 1 upper case character and 1 digit  \n\nThe client secret is optional and will be generated if it is left empty.  \n\nValid grant types are:  \n* **authorization_code**  \n* **implicit**  \n* **password**  \n* **client_credentials**  \n* **refresh_token**  \n\nGrant type `client_credentials` is actually not permitted!  \n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateOAuthClient.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GetS3Config": {
+            "main": "./lib/actions/GetS3Config.js",
+            "title": "Get S3 Storage Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GetS3Config.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PostS3Config": {
+            "main": "./lib/actions/PostS3Config.js",
+            "title": "Create S3 Storage Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PostS3Config.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "PutS3Config": {
+            "main": "./lib/actions/PutS3Config.js",
+            "title": "Update S3 Storage Configuration",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/PutS3Config.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cancelFileUploadByToken": {
+            "main": "./lib/actions/cancelFileUploadByToken.js",
+            "title": "Cancel file upload",
+            "description": "### Functional Description:\nCancel file upload.\n\n### Precondition:\nValid upload token.\n\n### Effects:\nUpload canceled, token invalidated and all already transfered chunks removed.\n\n### Further Information:\nIt is recommended to notify the API about cancelled uploads if possible.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cancelFileUploadByToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "uploadFileByToken": {
+            "main": "./lib/actions/uploadFileByToken.js",
+            "title": "Upload file by token",
+            "description": "### Functional Description:  \nUpload a chunk of a file.\n\n### Precondition:\nValid upload token.\n\n### Effects:\nChunk uploaded.\n\n### Further Information:\nUse this API if you cannot set custom headers during uploads.  \nRange requests are supported (please cf. [RCF 7233](https://tools.ietf.org/html/rfc7233) for details).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/uploadFileByToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "completeFileUploadByToken": {
+            "main": "./lib/actions/completeFileUploadByToken.js",
+            "title": "Complete file upload",
+            "description": "### Functional Description:\nFinish uploading a file.\n\n### Precondition:\nValid upload token.\n\n### Effects:\nFile created.\n\n### Further Information:\nThe provided file name might be changed in accordance with the resolution strategy:\n\n* **autorename**: changes the file name and adds a number to avoid conflicts.\n* **overwrite**: deletes any old file with the same file name.\n* **fail**: returns an error; in this case, another `PUT` request with a different file name may be sent.\n\nPlease ensure that all chunks have been transferred correctly before finishing the upload.\n\n### 200 OK is not used by this API",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/completeFileUploadByToken.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUserInfo": {
+            "main": "./lib/actions/getUserInfo.js",
+            "title": "Get user account info",
+            "description": "### Functional Description:  \nRetrieves all information regarding the current user's account.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nSetting the query parameter `more_info` to `true`, causes the API to return more details e.g. the user's groups.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUserInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateUserAccount": {
+            "main": "./lib/actions/updateUserAccount.js",
+            "title": "Update user account",
+            "description": "### Functional Description:  \nUpdate current user's account.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nUser updated.\n\n### Further Information:\nAll input fields are limited to **150** characters.  \nAllowed characters: **All**  \n\n### Authentication Method Options\n\n* **SQL**  \n    `none`\n\n* **Active Directory**  \n    (optional)  \n    key: `\"ad_config_id\"`  \n    value: \"Active Directory configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"Active Directory user name according to auth setting `userFilter`\"\n\n* **RADIUS**  \n    key: `\"username\"`  \n    value: \"Radius user name\"\n\n* **OpenID Connect**  \n    key: `\"openid_config_id\"`  \n    value: \"OpenID Connect configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"OpenID Connect user name according to auth setting `mappingClaim`\"",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateUserAccount.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCustomerInfo": {
+            "main": "./lib/actions/getCustomerInfo.js",
+            "title": "Get customer info",
+            "description": "### Functional Description:  \nLean API to get: \n* customer name\n* used / free space\n* used / avaliable\n* user account info\n\nof a customer.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCustomerInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "enableCustomerEncryption": {
+            "main": "./lib/actions/enableCustomerEncryption.js",
+            "title": "Enable encryption for this customer",
+            "description": "### Functional Description:  \nActivate client-side encryption for whole customer.\n\n### Precondition:\nOnly available for _\"Config Managers\"_.\n\n### Effects:\nClient-side encryption is enabled.\n\n### Further Information:\nSets the ability for this customer to encrypt rooms.  \nOnce enabled on customer level, it cannot be unset.  \nOn activation, a emergency keypair must be set.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/enableCustomerEncryption.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCustomerKeyPair": {
+            "main": "./lib/actions/getCustomerKeyPair.js",
+            "title": "Get customer keypair",
+            "description": "### Functional Description:  \nRetrieve the customer's keypair (aka system emergency password).\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nThe private key is password-based encrypted with `AES256` / `PBKDF2`.  \nFurther details in crypto documentation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCustomerKeyPair.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteUserKeyPair": {
+            "main": "./lib/actions/deleteUserKeyPair.js",
+            "title": "Delete user keypair",
+            "description": "### Functional Description:  \nDelete the user's keypair.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nThis will also remove all file keys that were encrypted with the user's public key.  \nIf the user had exclusive access to some files, those are removed as well since decrypting them became impossible.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteUserKeyPair.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUserKeyPair": {
+            "main": "./lib/actions/getUserKeyPair.js",
+            "title": "Get user keypair",
+            "description": "### Functional Description:  \nRetrieve the user's keypair.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nThe private key is password-based encrypted with `AES256` / `PBKDF2`.  \nFurther details in crypto documentation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUserKeyPair.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setUserKeyPair": {
+            "main": "./lib/actions/setUserKeyPair.js",
+            "title": "Set user keypair",
+            "description": "### Functional Description:  \nSet the user's keypair.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nThe keypair is set.\n\n### Further Information:\nOverwriting an existing keypair is not possible.  \nPlease delete the existing keypair first.  \nThe private key is password-based encrypted with `AES256` / `PBKDF2`.  \nFurther details in crypto documentation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setUserKeyPair.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "changeUserPassword": {
+            "main": "./lib/actions/changeUserPassword.js",
+            "title": "Change user password",
+            "description": "### Functional Description:\nChange the user's password.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nPassword is changed.\n\n### Further Information:\nPassword security configuration applies.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/changeUserPassword.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "userLogout": {
+            "main": "./lib/actions/userLogout.js",
+            "title": "Invalidate authentication token",
+            "description": "### Functional Description:  \nLogout a user.\n\n### Precondition:\nValid authentication token.\n\n### Effects:\nUser is logged out, authentication token invalidated.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/userLogout.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getOAuthAuthorizations": {
+            "main": "./lib/actions/getOAuthAuthorizations.js",
+            "title": "Get OAuth client authorizations",
+            "description": "### Functional Description:  \nRetrieve info about all OAuth client authorizations.\n\n### Precondition:\nValid auth token.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getOAuthAuthorizations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteOAuthAuthorization": {
+            "main": "./lib/actions/deleteOAuthAuthorization.js",
+            "title": "Delete OAuth authorization",
+            "description": "### Functional Description:\nDelete authorizations of an OAuth client.\n\n### Precondition:\nValid auth token; valid client ID.\n\n### Effects:\nAuthorizations for OAuth client are revoked.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteOAuthAuthorization.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "userPing": {
+            "main": "./lib/actions/userPing.js",
+            "title": "Ping",
+            "description": "### Functional Description:\nTest connection to DRACOON Server (while authenticated).\n\n### Precondition:\nNone.\n\n### Effects:\n`200 OK` with principal information is returned if successful.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/userPing.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUsers": {
+            "main": "./lib/actions/getUsers.js",
+            "title": "Get users",
+            "description": "### Functional Description:  \nGet users entry point.  \nReturns a list of DRACOON users.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:  \nAuthentication with `X-Sds-Auth-Token` required.\n\n### Filter\n\nFilter string syntax: `FIELD_NAME:OPERATOR:VALUE`  \nMultiple fields are supported.\n\n### Filter fields:\n\n* **login**  \n    Login name  \n    OPERATOR: `cn` (User login name contains value)  \n    VALUE: `Search string`\n\n* **firstName**  \n    First name  \n    OPERATOR: `cn` (User first name contains value)  \n    VALUE: `Search string`\n\n* **lastName**  \n    Last name  \n    OPERATOR: `cn` (User last name contains value)  \n    VALUE: `Search string`\n\n* **lockStatus**  \n    Lock status:\n    * 0 - Locked\n    * 1 - Web access allowed\n    * 2 - Web and mobile access allowed  \n    \n    OPERATOR: `eq` (User lock status)  \n    VALUE: `[0|1|2]`.\n\n* **effectiveRoles**  \n    Filter users with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ roles  \n    * `false`: _DIRECT_ roles  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ roles  \n\n    > _DIRECT_ means: e.g. user gets role **directly** granted from someone with _grant permission_ right.  \n    _EFFECTIVE_ means: e.g. user gets role through **group membership**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false]` (default: `false`)\n\n### Logical grouping:\nFiltering according first three fields (`login`, `lastName`, `firstName`) is intrinsically processed by the API as logical _OR_.  \nIn opposite, filtering according to last three field (lockStatus) is processed intrinsically as logical _AND_.\n\n### Example:\n* `login:cn:searchString_1|firstName:cn:searchString_2|lockStatus:eq:2`  \nFilter by `login` contains `searchString_1` OR `firstName` contains `searchString_2` AND user are not locked.\n\n### Sort\n\nSort string syntax: `FIELD_NAME:ORDER`  \nOrder can be `asc` or `desc`.  \nMultiple fields are supported.\n\n### Sort fields:\n\n* **login**: Login name\n* **firstName**: First name\n* **lastName**: Last name\n* **gender**: Gender\n* **lockStatus**: User lock status\n* **lastLoginSuccessAt**: Last successful logon date\n* **expireAt**: Expiration date\n\n### Example:\n* `firstName:asc|lastLoginSuccessAt:desc`  \nSort by `firstName` ascending AND by `lastLoginSuccessAt` descending",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUsers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createUser": {
+            "main": "./lib/actions/createUser.js",
+            "title": "Create user",
+            "description": "### Functional Description:\nCreate a new user.\n\n### Precondition:\nRight _\"change users\"_ required.\n\n### Effects:\nA new user is created.\n\n### Further Information:\n\n* If a user should not expire, leave `expireAt` empty.\n* All input fields are limited to **150** characters\n* Allowed characters: **All**\n\n### Authentication Method Options\n\n* **SQL**  \n    `none`\n\n* **Active Directory**  \n    (optional)  \n    key: `\"ad_config_id\"`  \n    value: \"Active Directory configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"Active Directory user name according to auth setting `userFilter`\"\n\n* **RADIUS**  \n    key: `\"username\"`  \n    value: \"Radius user name\"\n\n* **OpenID Connect**  \n    key: `\"openid_config_id\"`  \n    value: \"OpenID Connect configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"OpenID Connect user name according to auth setting `mappingClaim`\"",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteUser": {
+            "main": "./lib/actions/deleteUser.js",
+            "title": "Delete user",
+            "description": "### Functional Description:\nDelete a user.\n\n### Precondition:\nRight _\"delete users\"_ required.\n\n### Effects:\nUser is deleted.\n\n### Further Information:\nUser cannot be deleted if he is the last room administrator.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUser": {
+            "main": "./lib/actions/getUser.js",
+            "title": "Get user",
+            "description": "### Functional Description:  \nRetrieve detailed information about single user.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Authentication Method Options\n\n* **SQL**  \n    `none`\n\n* **Active Directory**  \n    (optional)  \n    key: `\"ad_config_id\"`  \n    value: \"Active Directory configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"Active Directory user name according to auth setting `userFilter`\"\n\n* **RADIUS**  \n    key: `\"username\"`  \n    value: \"Radius user name\"\n\n* **OpenID Connect**  \n    key: `\"openid_config_id\"`  \n    value: \"OpenID Connect configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"OpenID Connect user name according to auth setting `mappingClaim`\"",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateUser": {
+            "main": "./lib/actions/updateUser.js",
+            "title": "Update user",
+            "description": "### Functional Description:  \nUpdate the meta data of a user\n\n### Precondition:\nRight _\"change users\"_ required.\n\n### Effects:\nMeta data of a user is updated.\n\n### Further Information:\n\n* If a user should not expire, leave `expireAt` empty.\n* All input fields are limited to **150** characters\n* Allowed characters: **All**\n\n### Authentication Method Options\n\n* **SQL**  \n    `none`\n\n* **Active Directory**  \n    (optional)  \n    key: `\"ad_config_id\"`  \n    value: \"Active Directory configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"Active Directory user name according to auth setting `userFilter`\"\n\n* **RADIUS**  \n    key: `\"username\"`  \n    value: \"Radius user name\"\n\n* **OpenID Connect**  \n    key: `\"openid_config_id\"`  \n    value: \"OpenID Connect configuration ID\"  \n    \n    key: `\"username\"`  \n    value: \"OpenID Connect user name according to auth setting `mappingClaim`\"",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateUser.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUserGroups": {
+            "main": "./lib/actions/getUserGroups.js",
+            "title": "Get groups that user is a member of or/and can become a member",
+            "description": "### Functional Description:  \nRetrieves a List of groups a user is member of and / or can become a member.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **name**  \n    Group name  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isMember**  \n    Filter the groups which the user is or is not member of  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n### Example:\n* `is_member:eq:false|name:cn:searchString`  \nGet all groups that the user is not member of AND whose `name` is like `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUserGroups.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUserRoles": {
+            "main": "./lib/actions/getUserRoles.js",
+            "title": "Get user roles",
+            "description": "### Functional Description:  \nRetrieve a list of all roles and the role assignment rights of a user.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUserRoles.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getUsersRooms": {
+            "main": "./lib/actions/getUsersRooms.js",
+            "title": "Get rooms granted to the user or/and rooms that can be granted",
+            "description": "### Functional Description:  \nRetrieves a list of rooms granted to the user and / or that can be granted.\n\n### Precondition:\nRight _\"read users\"_ required.\n\n### Effects:\nNone.\n\n### Further Information:\nNone.\n\n### Filter\n\n### Filter fields:\n\n* **name**  \n    Room name  \n    OPERATOR: `cn` (multiple values not allowed)  \n    VALUE: `search string`\n\n* **isGranted**  \n    Filter the rooms which the user is or is not granted  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `true`)\n\n* **isLastAdmin**  \n    Filter the rooms which the user is last room administrator.  \n    Only with connect `isGranted:eq:true` possible.  \n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true]`.\n\n* **effectivePerm**  \n    Filter rooms with _DIRECT_ or _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `false`: _DIRECT_ permissions  \n    * `true`:  _DIRECT_ **AND** _EFFECTIVE_ permissions  \n    * `any`: _DIRECT_ **AND** _EFFECTIVE_ **AND** _OVER GROUP_ permissions  \n    \n    > _DIRECT_ means: e.g. room administrator grants read permissions to user **directly** on desired room.  \n    _EFFECTIVE_ means: e.g. user gets read permissions on desired room through **inheritance**.  \n    _OVER GROUP_ means: e.g. user gets read permissions on desired room through **group membership**.  \n\n    OPERATOR: `eq` (multiple values not allowed)  \n    VALUE: `[true|false|any]` (default: `false`)\n\n### Examples:\n* `isGranted:eq:false|name:cn:searchString`  \nGet all rooms that the user is not granted AND whose `name` is like `searchString`.\n\n* `isGranted:eq:true|isLastAdmin:eq:true|name:cn:searchString`  \nGet all rooms that the user is granted AND is last admin AND whose `name` is like `searchString`.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getUsersRooms.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setAllUserAttributes": {
+            "main": "./lib/actions/setAllUserAttributes.js",
+            "title": "Set custom user attributes",
+            "description": "### Functional Description:  \nSet custom user attributes.\n\n### Precondition:\nRight _\"change users\"_ required.\n\n### Effects:\nCustom user attributes gets set.\n\n### Further Information:\nBatch function.  \nAll existing user attributes will be deleted.  \nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setAllUserAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "setUserAttributes": {
+            "main": "./lib/actions/setUserAttributes.js",
+            "title": "Add or edit custom user attributes",
+            "description": "### Functional Description:  \nSet custom user attributes.\n\n### Precondition:\nRight _\"change users\"_ required.\n\n### Effects:\nCustom user attributes get added or edited.\n\n### Further Information:\nBatch function.  \nIf an entry exists before, it will be overwritten.  \nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/setUserAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "deleteUserAttributes": {
+            "main": "./lib/actions/deleteUserAttributes.js",
+            "title": "Delete custom user attribute",
+            "description": "### Functional Description:\nDelete custom user attribute.\n\n### Precondition:\nRight _\"change users\"_ required.\n\n### Effects:\nCustom user attribute gets deleted.\n\n### Further Information:\nAllowed characters for keys are: `[a-zA-Z0-9_-]`  \nCharacters are case-insensitive.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/deleteUserAttributes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

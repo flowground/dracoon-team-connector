@@ -1,0 +1,61 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "classification": {
+                    "description": "Classification ID (for files only):\n* 1 - public\n* 2 - for internal use only\n* 3 - confidential\n* 4 - strictly confidential",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "File name",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "Parent node ID (room or folder)",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "size": {
+                    "description": "File size in byte",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "classification",
+                "name",
+                "parentId"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

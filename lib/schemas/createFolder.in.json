@@ -1,0 +1,35 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "name": {
+                    "description": "Name",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "Parent node ID (room or folder)",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "parentId"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

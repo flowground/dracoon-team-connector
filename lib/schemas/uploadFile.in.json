@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "upload_id": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "type": "string",
+            "format": "binary"
+        },
+        "Content_Range": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

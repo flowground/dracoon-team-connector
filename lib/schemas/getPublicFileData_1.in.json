@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "access_key": {
+            "required": true,
+            "type": "string"
+        },
+        "token": {
+            "required": true,
+            "type": "string"
+        },
+        "Range": {
+            "required": false,
+            "type": "string"
+        },
+        "generic_mimetype": {
+            "required": false,
+            "type": "boolean"
+        }
+    }
+}

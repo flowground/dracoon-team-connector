@@ -1,0 +1,109 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "filesExpiryPeriod": {
+                    "description": "Number of days after which uploaded files expire",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "mailBody": {
+                    "description": "Notification email content",
+                    "type": "string"
+                },
+                "mailRecipients": {
+                    "description": "CSV string of recipient emails",
+                    "type": "string"
+                },
+                "mailSubject": {
+                    "description": "Notification email subject",
+                    "type": "string"
+                },
+                "maxSize": {
+                    "description": "DEPRECATED: Maximal total size of uploaded files (in bytes)",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "maxSlots": {
+                    "description": "DEPRECATED: Maximal amount of files to upload",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "Alias name",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                },
+                "notifyCreator": {
+                    "description": "Notify creator on every upload.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "sendMail": {
+                    "description": "Notify recipients",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "sendSms": {
+                    "description": "Send share password via SMS",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "showUploadedFiles": {
+                    "description": "Allow display of already uploaded files",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "smsRecipients": {
+                    "description": "CSV string of recipient MSISDNS",
+                    "type": "string"
+                },
+                "targetId": {
+                    "description": "Target room or folder ID",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name",
+                "targetId"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "items": {
+                    "description": "List of key-value pairs",
+                    "items": {
+                        "properties": {
+                            "key": {
+                                "description": "Entry key",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "Entry value",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "key",
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

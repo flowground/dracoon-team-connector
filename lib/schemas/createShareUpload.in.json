@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "access_key": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "name": {
+                    "description": "File name",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "size": {
+                    "description": "File size in byte",
+                    "format": "int64",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        }
+    }
+}

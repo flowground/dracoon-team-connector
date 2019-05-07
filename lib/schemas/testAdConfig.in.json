@@ -1,0 +1,52 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "ldapUsersDomain": {
+                    "description": "Search scope of Active Directory; only users below this node can log on.",
+                    "type": "string"
+                },
+                "serverAdminName": {
+                    "description": "Distinguished Name (DN) of Active Directory administrative account",
+                    "type": "string"
+                },
+                "serverAdminPassword": {
+                    "description": "Password of Active Directory administrative account",
+                    "type": "string"
+                },
+                "serverIp": {
+                    "description": "IPv4 or IPv6 address or host name",
+                    "type": "string"
+                },
+                "serverPort": {
+                    "description": "Port",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "sslFingerPrint": {
+                    "description": "SSL finger print of Active Directory server.\nMandatory for LDAPS connections.\nFormat: Algorithm/Fingerprint",
+                    "type": "string"
+                },
+                "useLdaps": {
+                    "description": "Determines whether LDAPS should be used instead of plain LDAP.",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "ldapUsersDomain",
+                "serverAdminName",
+                "serverAdminPassword",
+                "serverIp",
+                "serverPort",
+                "useLdaps"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

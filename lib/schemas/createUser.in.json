@@ -1,0 +1,115 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "authMethods": {
+                    "description": "Authentication methods",
+                    "items": {
+                        "properties": {
+                            "authId": {
+                                "description": "Authentication method ID",
+                                "type": "string"
+                            },
+                            "isEnabled": {
+                                "description": "Is enabled",
+                                "example": false,
+                                "type": "boolean"
+                            },
+                            "options": {
+                                "description": "Authentication method options",
+                                "items": {
+                                    "properties": {
+                                        "key": {
+                                            "description": "Entry key",
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "description": "Entry value",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "key",
+                                        "value"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "authId",
+                            "isEnabled"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "email": {
+                    "description": "DEPRECATED: Email",
+                    "type": "string"
+                },
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "firstName": {
+                    "description": "User first name",
+                    "type": "string"
+                },
+                "gender": {
+                    "description": "Gender",
+                    "enum": [
+                        "m",
+                        "f",
+                        "n"
+                    ],
+                    "type": "string"
+                },
+                "lastName": {
+                    "description": "User last name",
+                    "type": "string"
+                },
+                "login": {
+                    "description": "User login name",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Job title",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "authMethods",
+                "firstName",
+                "lastName",
+                "login"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

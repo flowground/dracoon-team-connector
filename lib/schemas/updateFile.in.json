@@ -1,0 +1,55 @@
+{
+    "type": "object",
+    "properties": {
+        "file_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "classification": {
+                    "description": "Expiration date/time",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "File name",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

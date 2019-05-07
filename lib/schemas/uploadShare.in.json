@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "access_key": {
+            "required": true,
+            "type": "string"
+        },
+        "upload_id": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "type": "string",
+            "format": "binary"
+        },
+        "Content_Range": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

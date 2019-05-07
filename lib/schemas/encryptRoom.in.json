@@ -1,0 +1,82 @@
+{
+    "type": "object",
+    "properties": {
+        "room_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "dataRoomRescueKey": {
+                    "description": "Room emergency password",
+                    "properties": {
+                        "privateKeyContainer": {
+                            "description": "Private key container (private key and version)",
+                            "properties": {
+                                "privateKey": {
+                                    "description": "Private key",
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "description": "Version",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "privateKey",
+                                "version"
+                            ],
+                            "type": "object"
+                        },
+                        "publicKeyContainer": {
+                            "description": "Public key container (private key and version)",
+                            "properties": {
+                                "publicKey": {
+                                    "description": "Public key",
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "description": "Version",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "publicKey",
+                                "version"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "privateKeyContainer",
+                        "publicKeyContainer"
+                    ],
+                    "type": "object"
+                },
+                "isEncrypted": {
+                    "description": "Encryption state",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "useDataSpaceRescueKey": {
+                    "description": "Use system emergency password for files in this room",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "isEncrypted"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

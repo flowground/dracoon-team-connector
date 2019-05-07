@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "role_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+        },
+        "requestBody": {
+            "properties": {
+                "ids": {
+                    "description": "List of group IDs",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "ids"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

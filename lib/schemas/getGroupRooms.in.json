@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "group_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "offset": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "filter": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

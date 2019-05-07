@@ -1,0 +1,66 @@
+{
+    "type": "object",
+    "properties": {
+        "node_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "items": {
+                    "description": "List of nodes to be copied",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "description": "Source node ID",
+                                "format": "int64",
+                                "type": "integer"
+                            },
+                            "name": {
+                                "description": "New node name",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "keepShareLinks": {
+                    "description": "Preserve Download Share Links and point them to the new node.\n(default: false)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "nodeIds": {
+                    "description": "DEPRECATED: Node IDs; use 'items' attribute",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "resolutionStrategy": {
+                    "description": "Node conflict resolution strategy:\n* autorename\n* overwrite\n* fail\n\n(default: autorename)",
+                    "enum": [
+                        "autorename",
+                        "overwrite",
+                        "fail"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

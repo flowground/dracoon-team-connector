@@ -1,0 +1,18 @@
+{
+    "type": "object",
+    "properties": {
+        "access_key": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "password": {
+                    "description": "Password (only for password-protected shares)",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "everywhere": {
+            "required": false,
+            "type": "boolean"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "offset": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "filter": {
+            "required": false,
+            "type": "string"
+        },
+        "sort": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "items": {
+                    "description": "List of pending assignments",
+                    "items": {
+                        "properties": {
+                            "groupId": {
+                                "description": "Unique identifier for the group",
+                                "format": "int64",
+                                "type": "integer"
+                            },
+                            "roomId": {
+                                "description": "Room ID",
+                                "format": "int64",
+                                "type": "integer"
+                            },
+                            "state": {
+                                "description": "Acceptance state:\n* ACCEPTED\n* WAITING\n* DENIED",
+                                "type": "string"
+                            },
+                            "userId": {
+                                "description": "Unique identifier for the user",
+                                "format": "int64",
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "groupId",
+                            "roomId",
+                            "state",
+                            "userId"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "items"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

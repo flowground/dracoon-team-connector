@@ -1,0 +1,183 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "expiration": {
+                    "description": "Expiration date/time",
+                    "properties": {
+                        "enableExpiration": {
+                            "description": "enabled/disabled",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "expireAt": {
+                            "description": "Expiration date\ne.g. 2015-12-31T23:59:00",
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "enableExpiration"
+                    ],
+                    "type": "object"
+                },
+                "fileId": {
+                    "description": "Source file ID",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "fileKey": {
+                    "description": "Encrypted file key for shares out of encrypted rooms",
+                    "properties": {
+                        "iv": {
+                            "description": "Initial vector",
+                            "type": "string"
+                        },
+                        "key": {
+                            "description": "Encryption key",
+                            "type": "string"
+                        },
+                        "tag": {
+                            "description": "Authentication tag\n(needed with authenticated encryption)",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "Version",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "iv",
+                        "key",
+                        "tag",
+                        "version"
+                    ],
+                    "type": "object"
+                },
+                "keyPair": {
+                    "description": "Keypair for Download Share pseudo-user",
+                    "properties": {
+                        "privateKeyContainer": {
+                            "description": "Private key container (private key and version)",
+                            "properties": {
+                                "privateKey": {
+                                    "description": "Private key",
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "description": "Version",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "privateKey",
+                                "version"
+                            ],
+                            "type": "object"
+                        },
+                        "publicKeyContainer": {
+                            "description": "Public key container (private key and version)",
+                            "properties": {
+                                "publicKey": {
+                                    "description": "Public key",
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "description": "Version",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "publicKey",
+                                "version"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "privateKeyContainer",
+                        "publicKeyContainer"
+                    ],
+                    "type": "object"
+                },
+                "mailBody": {
+                    "description": "Notification email content",
+                    "type": "string"
+                },
+                "mailRecipients": {
+                    "description": "CSV string of recipient emails",
+                    "type": "string"
+                },
+                "mailSubject": {
+                    "description": "Notification email subject",
+                    "type": "string"
+                },
+                "maxDownloads": {
+                    "description": "Max allowed downloads",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "Alias name",
+                    "type": "string"
+                },
+                "nodeId": {
+                    "description": "Source node ID",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                },
+                "notifyCreator": {
+                    "description": "Notify creator on every download.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "password": {
+                    "description": "Access password, not allowed for encrypted shares",
+                    "type": "string"
+                },
+                "sendMail": {
+                    "description": "Notify recipients",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "sendSms": {
+                    "description": "Send share password via SMS",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "showCreatorName": {
+                    "description": "Show creator first and last name",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "showCreatorUsername": {
+                    "description": "Show creator email address",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "smsRecipients": {
+                    "description": "CSV string of recipient MSISDNS",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fileId",
+                "nodeId"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

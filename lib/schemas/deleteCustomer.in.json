@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "customer_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "X_Sds_Service_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

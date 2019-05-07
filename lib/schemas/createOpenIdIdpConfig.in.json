@@ -1,0 +1,95 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "authorizationEndPointUrl": {
+                    "description": "URL of the authorization endpoint",
+                    "type": "string"
+                },
+                "clientId": {
+                    "description": "ID of the OAuth client",
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "Secret, which uses the client for authentication.",
+                    "type": "string"
+                },
+                "fallbackMappingClaim": {
+                    "description": "Name of the claim which is used for the user mapping fallback.\ne.g. 'sub'",
+                    "type": "string"
+                },
+                "issuer": {
+                    "description": "Issuer identifier of the IDP\nThe value is a case sensitive URL.",
+                    "type": "string"
+                },
+                "jwksEndPointUrl": {
+                    "description": "URL of the JWKS endpoint",
+                    "type": "string"
+                },
+                "mappingClaim": {
+                    "description": "Name of the claim which is used for the user mapping.\ne.g. 'email'",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the IDP",
+                    "type": "string"
+                },
+                "pkceChallengeMethod": {
+                    "description": "PKCE code challenge method.\ncf. [RFC 7636](https://tools.ietf.org/html/rfc7636)",
+                    "type": "string"
+                },
+                "pkceEnabled": {
+                    "description": "Determines whether PKCE is enabled.\ncf. [RFC 7636](https://tools.ietf.org/html/rfc7636)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "redirectUris": {
+                    "description": "URIs, to which a user is redirected after authorization.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "scopes": {
+                    "description": "List of requested scopes\nUsually 'openid' and the names of the requested claims.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tokenEndPointUrl": {
+                    "description": "URL of the token endpoint",
+                    "type": "string"
+                },
+                "userInfoEndPointUrl": {
+                    "description": "URL of the user info endpoint",
+                    "type": "string"
+                },
+                "userUpdateEnabled": {
+                    "description": "Determines if the user metadata is updated with data from the IDP.\nThe scope 'profile' is needed for the update.\nIf this scope is not granted, only the email address is updated.",
+                    "example": false,
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "authorizationEndPointUrl",
+                "clientId",
+                "clientSecret",
+                "issuer",
+                "jwksEndPointUrl",
+                "mappingClaim",
+                "name",
+                "redirectUris",
+                "scopes",
+                "tokenEndPointUrl",
+                "userInfoEndPointUrl"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

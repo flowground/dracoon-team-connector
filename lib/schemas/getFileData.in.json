@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "file_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "Range": {
+            "required": false,
+            "type": "string"
+        },
+        "generic_mimetype": {
+            "required": false,
+            "type": "boolean"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

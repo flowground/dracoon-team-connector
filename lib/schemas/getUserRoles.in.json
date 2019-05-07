@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "user_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

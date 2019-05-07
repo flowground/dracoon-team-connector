@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "accessKey": {
+                    "description": "Access key",
+                    "type": "string"
+                },
+                "bucketName": {
+                    "description": "S3 bucket name",
+                    "type": "string"
+                },
+                "endpointUrl": {
+                    "description": "S3 object storage endpoint URL",
+                    "type": "string"
+                },
+                "region": {
+                    "description": "S3 region",
+                    "type": "string"
+                },
+                "secretKey": {
+                    "description": "Secret to key",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "accessKey",
+                "bucketName",
+                "endpointUrl",
+                "secretKey"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

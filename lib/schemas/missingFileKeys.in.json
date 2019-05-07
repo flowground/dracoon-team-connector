@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "properties": {
+        "offset": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+        },
+        "room_id": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "file_id": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "user_id": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

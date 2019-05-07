@@ -1,0 +1,79 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "adminGroupIds": {
+                    "description": "List of group ids\nA room requires at least one admin (user or group)",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "adminIds": {
+                    "description": "List of user ids\nA room requires at least one admin (user or group)",
+                    "items": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": "array"
+                },
+                "hasActivitiesLog": {
+                    "description": "Is activities log active (for rooms only)\n(default: true)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "hasRecycleBin": {
+                    "description": "Is Recycle Bin active (for rooms only)",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "inheritPermissions": {
+                    "description": "Inherit permissions from parent room",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "Name",
+                    "type": "string"
+                },
+                "newGroupMemberAcceptance": {
+                    "description": "Behaviour when new users are added to the group:\n* autoallow\n* pending\n\nOnly relevant if 'adminGroupIds' has items.\n(default: autoallow)",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "User notes\nUse empty string to remove.",
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "Parent room ID or 'null' to create a top level room",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "quota": {
+                    "description": "Quota in byte",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "recycleBinRetentionPeriod": {
+                    "description": "Retention period for deleted nodes in days\n(Integer between 0 and 9999)",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

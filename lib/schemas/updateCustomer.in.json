@@ -1,0 +1,55 @@
+{
+    "type": "object",
+    "properties": {
+        "customer_id": {
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+        },
+        "requestBody": {
+            "properties": {
+                "companyName": {
+                    "description": "Company name",
+                    "type": "string"
+                },
+                "customerContractType": {
+                    "description": "Customer type",
+                    "enum": [
+                        "free",
+                        "demo",
+                        "pay"
+                    ],
+                    "type": "string"
+                },
+                "lockStatus": {
+                    "description": "Lock status:\n* false - unlocked\n* true - locked\n\nAll users of this customer will be blocked and can not login anymore.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "providerCustomerId": {
+                    "description": "Provider customer ID value (relevant only for type 'pay')",
+                    "type": "string"
+                },
+                "quotaMax": {
+                    "description": "Maximal disc space which can be allocated by customer in bytes.",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "userMax": {
+                    "description": "Maximal number of users",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "X_Sds_Service_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

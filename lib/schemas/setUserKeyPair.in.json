@@ -1,0 +1,54 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "privateKeyContainer": {
+                    "description": "Private key container (private key and version)",
+                    "properties": {
+                        "privateKey": {
+                            "description": "Private key",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "Version",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "privateKey",
+                        "version"
+                    ],
+                    "type": "object"
+                },
+                "publicKeyContainer": {
+                    "description": "Public key container (private key and version)",
+                    "properties": {
+                        "publicKey": {
+                            "description": "Public key",
+                            "type": "string"
+                        },
+                        "version": {
+                            "description": "Version",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "publicKey",
+                        "version"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "privateKeyContainer",
+                "publicKeyContainer"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Auth_Token": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

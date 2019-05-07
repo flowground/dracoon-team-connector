@@ -1,0 +1,193 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "properties": {
+                "activationCode": {
+                    "description": "Customer activation code string:\n* valid only for types 'free' and 'demo'\n* for 'pay' customers it is empty",
+                    "type": "string"
+                },
+                "companyName": {
+                    "description": "Company name",
+                    "type": "string"
+                },
+                "customerAttributes": {
+                    "description": "Customer attributes",
+                    "properties": {
+                        "items": {
+                            "description": "List of customer attributes",
+                            "items": {
+                                "properties": {
+                                    "key": {
+                                        "description": "Entry key",
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "Entry value",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "value"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "customerContractType": {
+                    "description": "Customer type",
+                    "enum": [
+                        "free",
+                        "demo",
+                        "pay"
+                    ],
+                    "type": "string"
+                },
+                "firstAdminUser": {
+                    "description": "First admin user of a customer",
+                    "properties": {
+                        "authMethods": {
+                            "description": "Authentication methods",
+                            "items": {
+                                "properties": {
+                                    "authId": {
+                                        "description": "Authentication method ID",
+                                        "type": "string"
+                                    },
+                                    "isEnabled": {
+                                        "description": "Is enabled",
+                                        "example": false,
+                                        "type": "boolean"
+                                    },
+                                    "options": {
+                                        "description": "Authentication method options",
+                                        "items": {
+                                            "properties": {
+                                                "key": {
+                                                    "description": "Entry key",
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "description": "Entry value",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "key",
+                                                "value"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "authId",
+                                    "isEnabled"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "email": {
+                            "description": "DEPRECATED: Email",
+                            "type": "string"
+                        },
+                        "firstName": {
+                            "description": "User first name",
+                            "type": "string"
+                        },
+                        "gender": {
+                            "description": "Gender",
+                            "enum": [
+                                "m",
+                                "f",
+                                "n"
+                            ],
+                            "type": "string"
+                        },
+                        "language": {
+                            "description": "Language ID or ISO 639-1 code",
+                            "type": "string"
+                        },
+                        "lastName": {
+                            "description": "User last name",
+                            "type": "string"
+                        },
+                        "login": {
+                            "description": "User login name",
+                            "type": "string"
+                        },
+                        "needsToChangeUserName": {
+                            "description": "If true, the user must change the 'userName' at the first login",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "notifyUser": {
+                            "description": "Notify user about his new account\n(default: true)",
+                            "example": false,
+                            "type": "boolean"
+                        },
+                        "password": {
+                            "description": "An initial password may be preset",
+                            "type": "string"
+                        },
+                        "title": {
+                            "description": "Job title",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "firstName",
+                        "lastName",
+                        "login"
+                    ],
+                    "type": "object"
+                },
+                "lockStatus": {
+                    "description": "Lock status:\n* false - unlocked\n* true - locked\n\nAll users of this customer will be blocked and can not login anymore.",
+                    "example": false,
+                    "type": "boolean"
+                },
+                "providerCustomerId": {
+                    "description": "Provider customer ID value (relevant only for type 'pay')",
+                    "type": "string"
+                },
+                "quotaMax": {
+                    "description": "Maximal disc space which can be allocated by customer in bytes.",
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "trialDays": {
+                    "description": "Number of days left for trial period (relevant only for type demo)",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "userMax": {
+                    "description": "Maximal number of users",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "customerContractType",
+                "firstAdminUser",
+                "quotaMax",
+                "userMax"
+            ],
+            "type": "object"
+        },
+        "X_Sds_Service_Token": {
+            "required": true,
+            "type": "string"
+        },
+        "X_Sds_Date_Format": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
